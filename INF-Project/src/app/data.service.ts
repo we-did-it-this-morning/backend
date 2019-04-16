@@ -11,4 +11,9 @@ export class DataService {
   getMalariaTypes() {
     return this.http.get('/api/test/malaria-types')
   }
+
+  getCountries(){
+    return ["South Africa","Argentina","Brazil","North America"];
+    //return this.http.get('http://localhost:2025/api/Employee/getAll?_guid=');
+  }
 }

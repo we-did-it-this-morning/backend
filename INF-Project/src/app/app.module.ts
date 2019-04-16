@@ -10,6 +10,7 @@ import { NavComponent } from './nav/nav.component';
 import { LoginComponent } from './login/login.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { MalariaPageComponent } from './malaria-page/malaria-page.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     AdminComponent,
     NavComponent,
-    LoginComponent
+    LoginComponent,
+    MalariaPageComponent
   ],
   imports: [
     BrowserModule,
