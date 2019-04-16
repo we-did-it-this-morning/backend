@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       //   console.log('repsonse ',response);
       //   if(response == true)
       //   {
-      //     this._router.navigate(['admin']);
+      //     this._router.navigateByUrl(['admin'],{state:{allowedIN:"true"}});
       //   }
       // });
     }
