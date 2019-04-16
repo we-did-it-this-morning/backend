@@ -1,0 +1,38 @@
+
+<div class="container">
+        <div class="jumbotron">
+            <div class="row">
+                    <div class="col">
+                            <div class="mx-auto w-50 p-3 bg-dark text-white text-center">
+                                <h1>Malaria</h1>
+                            </div>
+                    </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="malaria">
+            <div class="col-4" *ngFor="let m of malaria">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <div class="mx-auto w-50 p-3 bg-dark text-white text-center">
+                                <p>{{m.name}}</p>
+                            </div>
+                        </div>
+                        <div class="card-text">
+                            <p>Description: {{m.description}}</p>
+                            <p>Severity: {{m.severity}}</p>
+                            <p *ngFor="let t in m.treatments">
+                                {{t}}
+                            </p>
+                            <p *ngFor="let p in m.symptoms">
+                                {{p}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>                          
+        </div>
+</div>
+
+<router-outlet></router-outlet>
+
