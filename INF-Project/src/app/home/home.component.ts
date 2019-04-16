@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from '../data.service';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import {DataService} from '../data.service';
+import { FormBuilder, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
+import * as $ from 'jquery';
+import { forEach } from '@angular/router/src/utils/collection';
+import { count } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -8,17 +12,54 @@ import { DataService } from '../data.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private data:DataService) { }
+  countrySelect : FormGroup;
+  submitted = false;
+  countryList;
+  searchTerm = "";
+  matchingCountries = [];
+  @ViewChild('input') selectedInput; //References the input box
 
-  //!Variables
-  malaria : Object;
-  h1Style :boolean = true;
+  constructor(private data : DataService, private formBuilder : FormBuilder) { }
 
   ngOnInit() {
-    this.data.getMalariaTypes().subscribe(data => {
-        this.malaria = data
+
+    this.countrySelect = this.formBuilder.group({
+      country: ['', Validators.required]
+    });
+
+    this.countryList = this.data.getCountries();
+    console.log(this.countryList);
+  }
+
+  selectedCountry(country){
+    
+    this.selectedInput.nativeElement.value = country; // Sets the input to the selected country from the list
+    this.matchingCountries = [];
+  }
+
+  search(event){  // Dynamically search through countries and match the input
+    
+    this.searchTerm = event.target.value;
+    
+    if(this.searchTerm == ""){
+      this.matchingCountries = [];
+      return;
+    }
+     
+    this.matchingCountries = [];
+
+    this.countryList.forEach(country => {
+      
+      if( country.indexOf(this.searchTerm) != -1){
+        this.matchingCountries.push(country);
       }
-    );
+    });    
+  
+  }
+ 
+
+  onSubmit(){
+
   }
 
 }
