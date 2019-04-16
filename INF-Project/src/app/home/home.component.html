@@ -1,10 +1,11 @@
-
-<div class="container">
+<!-- 
+<div class="container"> -->
+    <app-nav></app-nav>
         <div class="jumbotron">
             <div class="row">
                     <div class="col">
                             <div class="mx-auto w-50 p-3 bg-dark text-white text-center">
-                                <h1>Malaria</h1>
+                                <h1>Malaria Information</h1>
                             </div>
                     </div>
             </div>
@@ -21,18 +22,19 @@
                         <div class="card-text">
                             <p>Description: {{m.description}}</p>
                             <p>Severity: {{m.severity}}</p>
-                            <p *ngFor="let t in m.treatments">
+                            <!-- <p *ngFor="let t in {{m.treatments}}">
                                 {{t}}
                             </p>
-                            <p *ngFor="let p in m.symptoms">
-                                {{p}}
-                            </p>
+                            <p *ngFor="let p in {{m.symptoms}}">
+                                {{p.level}}
+                                {{p.description}}
+                            </p> -->
                         </div>
                     </div>
                 </div>
             </div>                          
         </div>
-</div>
+<!-- </div> -->
 
 <router-outlet></router-outlet>
 
