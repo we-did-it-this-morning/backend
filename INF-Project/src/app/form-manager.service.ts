@@ -44,4 +44,12 @@ export class FormManagerService {
   {
     return this.http.get("http://infmalariapp.herokuapp.com/malaria-types");
   }
+  getSymptomTypes()
+  {
+    return this.http.get("http://infmalariapp.herokuapp.com/symptom-types");
+  }
+  getTreatmentTypes()
+  {
+    return this.http.get("http://infmalariapp.herokuapp.com/treatment-types");
+  }
 }

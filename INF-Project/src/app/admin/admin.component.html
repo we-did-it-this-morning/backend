@@ -22,6 +22,14 @@
                     </div>
                 </div>
             </div>
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                    <ng-container *ngIf="this.first">                
+                            <ng-container *ngIf="this.callVar.displayMessage;else elseblock">
+                                    <p class="alert alert-success">Operation executed successfully</p>
+                                    <ng-template #elseBlock> <p class="alert alert-danger">An error occured during the execution of the operation</p></ng-template>
+                            </ng-container>            
+                        </ng-container>
+            </div>
             
                 <div class="row">
                     <div class="mx-auto w-20">
@@ -38,7 +46,8 @@
                             <div class="card-body">
                                 <p class="card-text">Update or remove countries from the list.</p>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateCountries">Update</button>&nbsp;
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveCountries">Remove</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveCountries">Remove</button>&nbsp;
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewCountries">View Countries</button>
                             </div>
                         </div>
                       
@@ -50,7 +59,8 @@
                             <div class="card-body">
                                 <p class="card-text">Update/Add or remove prevention techniques for a specific country</p>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Prevention">Update</button>&nbsp;
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemovePrevention">Remove</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemovePrevention">Remove</button>&nbsp;
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewPreventions">View Preventions</button>
                             </div>
                         </div>&nbsp;
                         <div class="card">
@@ -58,7 +68,8 @@
                             <div class="card-body">
                                 <p class="card-text">Update/Add or remove information on a specific malaria type.</p>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#MalariaType">Update</button>&nbsp;
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveMalaria">Remove</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveMalaria">Remove</button>&nbsp;
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewMalaria">View MalariaType</button>
                             </div>
                         </div>&nbsp;
                         <div class="card">
@@ -66,7 +77,8 @@
                             <div class="card-body">
                                 <p class="card-text">Update/Add or remove information of about a symptom.</p>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddSymptoms">Update</button>&nbsp;
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveSymptoms">Remove</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveSymptoms">Remove</button>&nbsp;
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewSymptoms">View Symptoms</button>
                             </div>
                         </div>
                     </div>&nbsp;</div>
@@ -77,7 +89,8 @@
                                     <div class="card-body">
                                         <p class="card-text">Update treatments.</p>
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateTreatments">Update</button>&nbsp;
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveTreatments">Remove</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveTreatments">Remove</button>&nbsp;
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewTreatments">View Treatments</button>
                                     </div>
                                 </div>&nbsp;
                                 <div class="card mx-auto  ">
@@ -85,7 +98,8 @@
                                     <div class="card-body">
                                         <p class="card-text">Add/Update or remove Severities of Malaria in different countries.</p>
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateSeverities">Update</button>&nbsp;
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveSeverities">Remove</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveSeverities">Remove</button>&nbsp;
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewSeverities">View Severities</button>
                                     </div>
                                 </div></div>
                     </div>
@@ -142,10 +156,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="id">Id</label>
-                                    <select name="id" formControlName="id" >
+                                    <!-- <select name="id" formControlName="id" >
                                             <option *ngFor="let item of listCountries"  value='{{ item.id }}'  >{{ item.id }}</option>
-                                        </select>
-                                    <!-- <input type="text" class="form-control" formControlName="id"  placeholder="Enter Id of country for update."> -->
+                                        </select> -->
+                                    <input type="number" class="form-control" formControlName="id"  placeholder="Enter Id of country for update.">
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Name</label>
@@ -163,6 +177,46 @@
                     </div>
                 </div>
             </div>
+             <!-- ****************************************************************************************************************************************************** -->
+            <!-- Modal Countries -->
+            <div class="modal fade" id="viewCountries" tabindex="-1" role="dialog" aria-labelledby="viewCountries" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Countries</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                    <table class="table">
+                                            <thead class="thead-dark">
+                                              <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Malaria Types</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr *ngFor="let item of listCountries">
+                                                        <td>
+                                                            {{item.id}}
+                                                        </td>
+                                                        <td>
+                                                                {{item.name}}
+                                                        </td>
+                                                        <td>
+                                                                {{item.malariaTypes}}
+                                                        </td>
+                                                    </tr>
+                                                    
+                                            </tbody>
+                                    </table>
+                                <br>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <!-- ****************************************************************************************************************************************************** -->
             <!-- Modal Countries -->
             <div class="modal fade" id="RemoveCountries" tabindex="-1" role="dialog" aria-labelledby="RemoveCountries" aria-hidden="true">
@@ -176,7 +230,7 @@
                         <div class="modal-body">
                             <form [formGroup]="RemoveCountries"  novalidate>
                                     <div *ngIf="RemoveCountries.controls['id'].invalid && (RemoveCountries.controls['id'].dirty || RemoveCountries.controls['id'].touched)" class="alert alert-danger">
-                                            <div *ngIf="RemoveCountries.controls['id'].errors.required">Name is required.</div>
+                                            <div *ngIf="RemoveCountries.controls['id'].errors.required">Id is required.</div>
                                         </div>
                                 <div class="form-group">
                                    
@@ -214,9 +268,10 @@
                               
                                 <div class="form-group">
                                     <label for="id">ID</label>
-                                    <select name="id" formControlName="id" >
+                                    <!-- <select name="id" formControlName="id" >
                                             <option *ngFor="let item of listTreatments"  value='{{ item.id }}'  >{{ item.id }}</option>
-                                        </select>
+                                        </select> -->
+                                        <input type="number" class="form-control" formControlName="id"  placeholder="Enter Id.">
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Name</label>
@@ -238,6 +293,68 @@
                     </div>
                 </div>
             </div>
+             <!-- ****************************************************************************************************************************************************** -->
+            <!-- Modal Treatments -->
+            <div class="modal fade" id="viewTreatments" tabindex="-1" role="dialog" aria-labelledby="viewTreatments" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">View Treatments</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                    <table class="table">
+                                            <thead class="thead-dark">
+                                              <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Treatment Types</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr *ngFor="let item of listTreatments">
+                                                        <td>
+                                                            {{item.id}}
+                                                        </td>
+                                                        <td>
+                                                                {{item.name}}
+                                                        </td>
+                                                        <td>
+                                                                {{item.description}}
+                                                        </td>
+                                                        <td>
+                                                            {{item.treatmentType}}                                                             
+                                                        </td>
+                                                    </tr>                                                    
+                                            </tbody>
+                                    </table>
+                                    <span class="align-left"><strong>Treatment types</strong></span>
+                                    <table class="table">
+                                            <thead class="thead-dark">
+                                              <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Name</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr *ngFor="let i of listTreatmentTypes">
+                                                        <td>
+                                                            {{i.id}}
+                                                        </td>
+                                                        <td>
+                                                                {{i.name}}
+                                                        </td>
+                                                    </tr>                                                    
+                                            </tbody>
+                                    </table>
+                                <br>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <!-- ****************************************************************************************************************************************************** -->
             <!-- Modal Treatments -->
             <div class="modal fade" id="RemoveTreatments" tabindex="-1" role="dialog" aria-labelledby="RemoveTreatments" aria-hidden="true">
@@ -290,9 +407,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="level">Level</label>
-                                    <select name="id" formControlName="level" >
+                                    <!-- <select name="id" formControlName="level" >
                                             <option *ngFor="let item of listSeverities"  value='{{ item.level }}'  >{{ item.level }}</option>
-                                        </select>
+                                        </select> -->
+                                        <input type="number" class="form-control" formControlName="level"  placeholder="Enter Level.">
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description</label>
@@ -300,7 +418,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="preventions">Preventions</label>
-                                    <input type="text" class="form-control" formControlName="type" id="type" placeholder="Treatment number">
+                                    <input type="text" class="form-control" formControlName="type" id="type" placeholder="Prevention number">
                                 </div>
                                 <button type="submit" (click)="onSubmit('UpdateSeverities')"  class="btn btn-primary" data-dismiss="modal" [disabled]="!updateAddSeverities.valid">Update</button>
                             </form>
@@ -310,6 +428,46 @@
                     </div>
                 </div>
             </div>
+                     <!-- ****************************************************************************************************************************************************** -->
+            <!-- Modal Treatments -->
+            <div class="modal fade" id="viewSeverities" tabindex="-1" role="dialog" aria-labelledby="viewSeverities" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">View Severities</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                    <table class="table">
+                                            <thead class="thead-dark">
+                                              <tr>
+                                                <th scope="col">Level</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Preventions</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr *ngFor="let item of listSeverities">
+                                                        <td>
+                                                            {{item.level}}
+                                                        </td>
+                                                        <td>
+                                                                {{item.description}}
+                                                        </td>
+                                                        <td>
+                                                                {{item.preventions}}
+                                                        </td>
+                                                    </tr>
+                                                    
+                                            </tbody>
+                                    </table>
+                                <br>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <!-- ****************************************************************************************************************************************************** -->
             <!-- Modal Severities -->
             <div class="modal fade" id="RemoveSeverities" tabindex="-1" role="dialog" aria-labelledby="RemoveSeverities" aria-hidden="true">
@@ -359,9 +517,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="id">ID</label>
-                                    <select name="id" formControlName="id" >
+                                    <!-- <select name="id" formControlName="id" >
                                             <option *ngFor="let item of listPreventions"  value='{{ item.id }}'  >{{ item.id }}</option>
-                                        </select>
+                                        </select> -->
+                                        <input type="number" class="form-control" formControlName="id"  placeholder="Enter Id.">
                                 </div>
                                 <div class="form-group">
                                     <label for="name">name</label>
@@ -383,6 +542,46 @@
                     </div>
                 </div>
             </div>
+                      <!-- ****************************************************************************************************************************************************** -->
+            <!-- Modal Treatments -->
+            <div class="modal fade" id="viewPreventions" tabindex="-1" role="dialog" aria-labelledby="viewPreventions" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">View Preventions</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                    <table class="table">
+                                            <thead class="thead-dark">
+                                              <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Description</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr *ngFor="let item of listPreventions">
+                                                        <td>
+                                                            {{item.id}}
+                                                        </td>
+                                                        <td>
+                                                                {{item.name}}
+                                                        </td>
+                                                        <td>
+                                                                {{item.description}}
+                                                        </td>
+                                                    </tr>
+                                                    
+                                            </tbody>
+                                    </table>
+                                <br>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <!-- ****************************************************************************************************************************************************** -->
             <div class="modal fade" id="RemovePrevention" tabindex="-1" role="dialog" aria-labelledby="RemovePrevention" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -395,7 +594,7 @@
                         <div class="modal-body">
                             <form [formGroup]="RemovePreventions"  novalidate>
                                 <div *ngIf="RemovePreventions.controls['name'].invalid && (RemovePreventions.controls['name'].dirty || RemovePreventions.controls['name'].touched)" class="alert alert-danger">
-                                    <div *ngIf="RemovePreventions.controls['name'].errors.required">Name is required.</div>
+                                    <div *ngIf="RemovePreventions.controls['name'].errors.required">Id is required.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="name">ID</label>
@@ -440,9 +639,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="id">ID</label>
-                                    <select name="id" formControlName="id" >
+                                    <!-- <select name="id" formControlName="id" >
                                             <option *ngFor="let item of listMalaria"  value='{{ item.id }}'  >{{ item.id }}</option>
-                                        </select>
+                                        </select> -->
+                                        <input type="number" class="form-control" formControlName="id"  placeholder="Enter Id.">
+
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Name</label>
@@ -472,6 +673,101 @@
                     </div>
                 </div>
             </div>
+                          <!-- ****************************************************************************************************************************************************** -->
+            <!-- Modal Treatments -->
+            <div class="modal fade" id="viewMalaria" tabindex="-1" role="dialog" aria-labelledby="viewMalaria" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">View Malaria Types</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                    <table class="table country">
+                                            <thead class="thead-dark">
+                                              <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Severities</th>
+                                                <th scope="col">Treatments</th>
+                                                <th scope="col">Symptoms</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr *ngFor="let item of listMalaria">
+                                                        <td>
+                                                            {{item.id}}
+                                                        </td>
+                                                        <td>
+                                                                {{item.name}}
+                                                        </td>
+                                                        <td>
+                                                                {{item.description}}
+                                                        </td>
+                                                        <td>
+                                                                {{item.severity}}
+                                                        </td>
+                                                        <td>
+                                                                {{item.treatments}}
+                                                        </td>
+                                                        <td>
+                                                                {{item.symptoms}}
+                                                        </td>
+                                                    </tr>
+                                                    
+                                            </tbody>
+                                    </table>
+                                    <span class="align-left"><strong>Treatments</strong></span>
+                                    <table class="table">
+                                            <thead class="thead-dark">
+                                              <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Name</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr *ngFor="let ss of listTreatmentTypes">
+                                                        <td>
+                                                            {{ss.id}}
+                                                        </td>
+                                                        <td>
+                                                                {{ss.name}}
+                                                        </td>
+                                                    </tr>                                                    
+                                            </tbody>
+                                    </table>
+                                    <span class="align-left"><strong>Symptoms</strong></span>
+                                    <table class="table">
+                                            <thead class="thead-dark">
+                                              <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Description</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr *ngFor="let sees of listSymptomTypes">
+                                                        <td>
+                                                            {{sees.id}}
+                                                        </td>
+                                                        <td>
+                                                                {{sees.name}}
+                                                        </td>
+                                                        <td>
+                                                                {{sees.description}}
+                                                        </td>
+                                                        
+                                                    </tr>                                                    
+                                            </tbody>
+                                    </table>
+                                <br>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <!-- ****************************************************************************************************************************************************** -->
             <div class="modal fade" id="RemoveMalaria" tabindex="-1" role="dialog" aria-labelledby="RemoveMalaria" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -484,7 +780,7 @@
                         <div class="modal-body">
                             <form [formGroup]="RemoveMalaria"  novalidate>
                                 <div *ngIf="RemoveMalaria.controls['name'].invalid && (RemoveMalaria.controls['name'].dirty || RemoveMalaria.controls['name'].touched)" class="alert alert-danger">
-                                    <div *ngIf="RemoveMalaria.controls['name'].errors.required">Name is required.</div>
+                                    <div *ngIf="RemoveMalaria.controls['name'].errors.required">Id is required.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Name</label>
@@ -512,7 +808,7 @@
                         <div class="modal-body">
                             <form [formGroup]="RemoveSymptoms"  novalidate>
                                 <div *ngIf="RemoveSymptoms.controls['name'].invalid && (RemoveSymptoms.controls['name'].dirty || RemoveSymptoms.controls['name'].touched)" class="alert alert-danger">
-                                    <div *ngIf="RemoveSymptoms.controls['name'].errors.required">Name is required.</div>
+                                    <div *ngIf="RemoveSymptoms.controls['name'].errors.required">ID is required.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Name</label>
@@ -550,9 +846,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="id">ID</label>
-                                    <select name="id" formControlName="id" >
+                                    <!-- <select name="id" formControlName="id" >
                                             <option *ngFor="let item of listSymptoms"  value='{{ item.id }}'  >{{ item.id }}</option>
-                                        </select>
+                                        </select> -->
+                                        <input type="number" class="form-control" formControlName="id"  placeholder="Enter Id.">
+
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Name</label>
@@ -574,10 +872,68 @@
                     </div>
                 </div>
             </div>
-            <ng-container *ngIf="this.first">                
-            <ng-container *ngIf="this.callVar.displayMessage;else elseblock">
-                    <p class="alert alert-success">Operation executed successfully</p>
-                    <ng-template #elseBlock> <p class="alert alert-danger">An error occured during the execution of the operation</p></ng-template>
-            </ng-container>
+                          <!-- ****************************************************************************************************************************************************** -->
+            <!-- Modal Treatments -->
+            <div class="modal fade" id="viewSymptoms" tabindex="-1" role="dialog" aria-labelledby="viewSymptoms" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">View Symptoms</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                    <table class="table country">
+                                            <thead class="thead-dark">
+                                              <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Symptom Type</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr *ngFor="let item of listSymptoms">
+                                                        <td>
+                                                            {{item.id}}
+                                                        </td>
+                                                        <td>
+                                                                {{item.name}}
+                                                        </td>
+                                                        <td>
+                                                                {{item.description}}
+                                                        </td>
+                                                        <td>
+                                                                {{item.symptomType}}
+                                                        </td>
+                                                    </tr>
+                                                    
+                                            </tbody>
+                                    </table>
+                                    <span class="align-left"><strong>Symptom Types</strong></span>
+                                    <table class="table country">
+                                            <thead class="thead-dark">
+                                              <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Name</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr *ngFor="let ii of listSymptomTypes">
+                                                        <td>
+                                                            {{ii.id}}
+                                                        </td>
+                                                        <td>
+                                                                {{ii.name}}
+                                                        </td>
+                                                    </tr>
+                                                    
+                                            </tbody>
+                                    </table>
+                                <br>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             
-        </ng-container>

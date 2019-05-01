@@ -13,6 +13,7 @@ export class AdminComponent implements OnInit {
 
   state$:Object;
   first:boolean=false;
+
   userRegistration: FormGroup;
   countryAddUpdate: FormGroup;
   RemoveCountries: FormGroup;
@@ -26,12 +27,15 @@ export class AdminComponent implements OnInit {
   RemoveMalaria: FormGroup;
   updateAddSymptoms: FormGroup;
   RemoveSymptoms: FormGroup;
+
   listCountries:Object;
   listPreventions:Object;
   listMalaria:Object;
   listSymptoms:Object;
   listTreatments:Object;
   listSeverities:Object;
+  listSymptomTypes:Object;
+  listTreatmentTypes:Object;
 
   constructor(public router: Router,private formBuilder: FormBuilder,private token:TokenManagerService,private callVar:FormManagerService) { }
   Logout()
@@ -121,7 +125,7 @@ export class AdminComponent implements OnInit {
     }
     else if(buttonType==="UpdateCountries")
     {
-      var seperate = this.countryAddUpdate.controls["typeM"].value.split(',');
+      var seperate = this.countryAddUpdate.controls["typeM"].value.split(',').map(Number);;
       var objTwo = {"id":this.countryAddUpdate.controls["id"].value,"name":this.countryAddUpdate.controls["name"].value,"malariaTypes":seperate};
       var type= 'update-country';
       this.callVar.doApiCall(this.token.retrieve(),objTwo,type);
@@ -134,7 +138,16 @@ export class AdminComponent implements OnInit {
     }
     else if(buttonType==="UpdateTreatments")
     {
-      var objFour = {"id":this.updateAddTreatments.controls["id"].value,"name":this.updateAddTreatments.controls["name"].value,"description":this.updateAddTreatments.controls["description"].value,"treatmentType":this.updateAddTreatments.controls["type"].value};
+      var objFour;
+      if(this.updateAddTreatments.controls["id"].value)
+      {
+        objFour = {"id": this.updateAddTreatments.controls["id"].value,"name":this.updateAddTreatments.controls["name"].value,"description":this.updateAddTreatments.controls["description"].value,"treatmentType":this.updateAddTreatments.controls["type"].value};
+      
+      }else
+      {
+        objFour = {"name":this.updateAddTreatments.controls["name"].value,"description":this.updateAddTreatments.controls["description"].value,"treatmentType":this.updateAddTreatments.controls["type"].value};
+      }
+      
       var type= 'update-treatment';
       this.callVar.doApiCall(this.token.retrieve(),objFour,type);
     }
@@ -146,10 +159,10 @@ export class AdminComponent implements OnInit {
     }
     else if(buttonType==="UpdateSeverities")  
     {
-      var seperateTwo = this.updateAddSeverities.controls["type"].value.split(',');
+      var seperateTwo = this.updateAddSeverities.controls["type"].value.split(',').map(Number);;
       var objSix = {"level":this.updateAddSeverities.controls["level"].value,"description":this.updateAddSeverities.controls["description"].value,"preventions":seperateTwo};
       var type="update-severity";
-      this.callVar.doApiCall(this.token.retrieve(),objSix,type);
+      //this.callVar.doApiCall(this.token.retrieve(),objSix,type);
     }
     else if(buttonType==="RemoveSeverities")
     {
@@ -159,7 +172,7 @@ export class AdminComponent implements OnInit {
     }
     else if(buttonType==="updatePreventions")
     {
-      var seperateThree = this.updateAddPreventions.controls["severityNum"].value.split(',');
+      var seperateThree = this.updateAddPreventions.controls["severityNum"].value.split(',').map(Number);
       var objEight = {"id":this.updateAddPreventions.controls["id"].value,"name":this.updateAddPreventions.controls["name"].value,"description":this.updateAddPreventions.controls["description"].value,"severities":seperateThree};
       var type="update-prevention";
       this.callVar.doApiCall(this.token.retrieve(),objEight,type);
@@ -172,9 +185,18 @@ export class AdminComponent implements OnInit {
     }
     else if(buttonType==="updateAddMalariaTypes")
     {
-      var seperateFour = this.updateAddMalariaTypes.controls["Treatments"].value.split(',');
-      var seperateFive = this.updateAddMalariaTypes.controls["Symptoms"].value.split(',');
-      var objTen = {"id":this.updateAddMalariaTypes.controls["id"].value,"name":this.updateAddMalariaTypes.controls["name"].value,"description":this.updateAddMalariaTypes.controls["description"].value,"severity":this.updateAddMalariaTypes.controls["level"].value,"treatments":seperateFour,"symptoms":seperateFive};
+      var objTen;
+
+      var seperateFour = this.updateAddMalariaTypes.controls["Treatments"].value.split(',').map(Number);
+      var seperateFive = this.updateAddMalariaTypes.controls["Symptoms"].value.split(',').map(Number);
+      if(this.updateAddMalariaTypes.controls["id"].value)
+      {
+         objTen = {"id":this.updateAddMalariaTypes.controls["id"].value,"name":this.updateAddMalariaTypes.controls["name"].value,"description":this.updateAddMalariaTypes.controls["description"].value,"severity":this.updateAddMalariaTypes.controls["level"].value,"treatments":seperateFour,"symptoms":seperateFive};
+      }
+      else
+      {
+        objTen = {"name":this.updateAddMalariaTypes.controls["name"].value,"description":this.updateAddMalariaTypes.controls["description"].value,"severity":this.updateAddMalariaTypes.controls["level"].value,"treatments":seperateFour,"symptoms":seperateFive};
+      }
       var type="update-malaria-type";
       this.callVar.doApiCall(this.token.retrieve(),objTen,type);
     }
@@ -192,10 +214,19 @@ export class AdminComponent implements OnInit {
     }
     else if(buttonType==="updateSymptom")
     {
-      var objThirteen={"id":this.updateAddSymptoms.controls["id"].value,"name":this.updateAddSymptoms.controls["name"].value,"description":this.updateAddSymptoms.controls["description"].value,"symptomType":this.updateAddSymptoms.controls["sType"].value};
+      var objThirteen;
+      if(this.updateAddSymptoms.controls["id"].value)
+      {
+       objThirteen={"id":this.updateAddSymptoms.controls["id"].value,"name":this.updateAddSymptoms.controls["name"].value,"description":this.updateAddSymptoms.controls["description"].value,"symptomType":this.updateAddSymptoms.controls["sType"].value};        
+      }
+      else{
+        objThirteen={"name":this.updateAddSymptoms.controls["name"].value,"description":this.updateAddSymptoms.controls["description"].value,"symptomType":this.updateAddSymptoms.controls["sType"].value};        
+
+      }
       var type="update-symptom";
       this.callVar.doApiCall(this.token.retrieve(),objThirteen,type);
     }
+    // this.populateList();
   }
   populateList()
   {
@@ -222,6 +253,14 @@ export class AdminComponent implements OnInit {
     this.callVar.getMalaria().subscribe((data:Response) =>
     {      
       this.listMalaria = data['data'];   
+    });
+    this.callVar.getSymptomTypes().subscribe((data:Response) =>
+    {      
+      this.listSymptomTypes = data['data'];   
+    });
+    this.callVar.getTreatmentTypes().subscribe((data:Response) =>
+    {      
+      this.listTreatmentTypes = data['data'];   
     });
   }
    
