@@ -1,0 +1,191 @@
+Every request except for user management require the token appended to the url in the GET parameters:
+GET /country?token=abcdef
+
+POST type must be application/json
+
+If an error occurs the following will be returned:
+{
+  success: false;
+  message: string; // e.g. already here
+}
+Otherwise
+{
+  success: true;
+  ...
+}
+
+
+--- user management ---
+POST /log-in
+{
+  username: string;
+  password: string;
+}
+
+Returns
+{
+  token: string;
+}
+
+POST /register 
+{
+  username: string;
+  password: string;
+}
+
+
+--- countries ---
+
+
+POST /update-country
+{
+  id?: number;
+  name: string;
+  malariaTypes: number[];
+}
+
+GET /countries
+
+Returns
+Array<{
+  id: string;
+  name: string;
+  malariaTypes: number[];
+}>
+
+
+
+--- severities ---
+POST /update-severity
+{
+  level: number; // PK
+  description: string;
+  preventions: number[];
+}
+
+POST /remove-severity
+{
+  level: number;
+}
+
+GET /severity
+{
+  level: number;
+}
+Returns
+{
+  level: number;
+  description: string;
+  preventions: number[];
+}
+
+
+GET /severities {}
+
+Returns
+Array<{
+  level: number;
+  description: string;
+}>
+
+
+
+
+--- preventions ---
+POST /update-prevention
+{
+  id?: number;
+  name: string;
+  description: string;
+}
+
+GET /preventions
+Returns
+Array<{
+  id: number;
+  name: string;
+  description: string;
+}>
+
+
+
+
+--- malaria types ---
+POST /update-malaria-type
+{
+  id?: number;
+  name: string;
+  description: string;
+  severity: number;
+  treatments: number[];
+  symptoms: number[];
+}
+
+GET /malaria-types
+Returns
+Array<{
+  id: number;
+  name: string;
+  description: string;
+  severity: number;
+  treatments: number[];
+  symptoms: number[];
+}>
+
+
+--- treatments ---
+POST /update-treatment
+{
+  id?: number;
+  name: string;
+  description: string;
+  treatmentType: number;
+}
+
+GET /treatment
+{
+  id: number;
+}
+Returns 
+{
+  id: number;
+  name: string;
+  description: string;
+  treatmentType: number;
+}
+
+POST /update-treatment-type
+{
+  id?: number;
+  name: string;
+}
+
+
+--- symptoms ---
+POST /update-symptom
+{
+  id?: number;
+  name: string;
+  description: string;
+  symptomType: number;
+}
+
+
+GET /symptom
+{
+  id: number
+}
+Returns
+{
+  id: number;
+  name: string;
+  description: string;
+  symptomType: number;
+}
+
+
+POST /update-symptom-type
+{
+  id?: number;
+  name: string;
+}

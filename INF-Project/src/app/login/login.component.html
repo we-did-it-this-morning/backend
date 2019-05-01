@@ -8,15 +8,24 @@
             </div>
     </div>
 </div>
- 
-<form [formGroup]="userInfo" (ngSubmit)="onSubmit()">
-    <div class="form-group">
+<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+<div class="text-center">
+<form [formGroup]="userInfo"  novalidate>
+    <div *ngIf="userInfo.controls['userName'].invalid && (userInfo.controls['userName'].dirty || userInfo.controls['userName'].touched)" class="alert alert-danger">
+        <div *ngIf="userInfo.controls['userName'].errors.required">Name is required.</div>
+    </div>
+    <div *ngIf="userInfo.controls['password'].invalid && (userInfo.controls['password'].dirty || userInfo.controls['password'].touched)" class="alert alert-danger">
+        <div *ngIf="userInfo.controls['password'].errors.required">Password is required.</div>
+    </div>
+    <div class="form-group ">
       <label for="userName">Username</label>
-      <input type="text" class="form-control" formControlName="username" id="userName" placeholder="Enter username">
+      <input type="text" class="form-control" formControlName="userName" #userName placeholder="Enter username">
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <input type="password" class="form-control" formControlName="password" id="password" placeholder="Password">
+      <input type="password" class="form-control" formControlName="password" #password placeholder="Password">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" (click)="onSubmit(userName.value,password.value)" [disabled]="!userInfo.valid">Submit</button>
 </form>
+</div>
+</div>

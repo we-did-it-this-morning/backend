@@ -1,346 +1,553 @@
-<app-nav></app-nav>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Malaria</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">Malaria Info</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="Logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+</nav>
 <!-- <div *ngif="state$"> -->
-
-    <div class="jumbotron">
-        <div class="row">
-                <div class="col">
+        <div class="jumbotron">
+                <div class="row">
+                    <div class="col">
                         <div class="mx-auto w-50 p-3 bg-dark text-white text-center">
                             <h1>Admin</h1>
                         </div>
-                </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-                <div class="col auto">
-                <div class="card">
-                    <div class="card-header">
-                        Registration
                     </div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            Add new users.
-                        </p>
-                        <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#Register">
-                                Register User
-                        </button>   
-                    </div></div>
-                </div><div class="col auto">
-                <div class="card">
-                        <div class="card-header">
-                            Countries
+                </div>
+            </div>
+            
+                <div class="row">
+                    <div class="mx-auto w-20">
+                    <div class="card-colums ">
+                        <div class="card">
+                            <div class="card-header">Registration</div>
+                            <div class="card-body">
+                                <p class="card-text">Add new users.</p>
+                                <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#Register">Register User</button>
+                            </div>
+                        </div>&nbsp;
+                        <div class="card">
+                            <div class="card-header">Countries</div>
+                            <div class="card-body">
+                                <p class="card-text">Update or remove countries from the list.</p>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateCountries">Update</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveCountries">Remove</button>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <p class="card-text">
-                                Update or remove countries from the list.
-                            </p>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateCountries">
-                                    Update Countries
-                            </button> 
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveCountries">
-                                    Remove Country
-                            </button>  
+                      
+                    </div>&nbsp;</div>
+                    <div class="mx-auto w-20">
+                    <div class="card-colums">
+                        <div class="card">
+                            <div class="card-header">Preventions</div>
+                            <div class="card-body">
+                                <p class="card-text">Update/Add or remove prevention techniques for a specific country</p>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Prevention">Update</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemovePrevention">Remove</button>
+                            </div>
+                        </div>&nbsp;
+                        <div class="card">
+                            <div class="card-header">Malaria Types</div>
+                            <div class="card-body">
+                                <p class="card-text">Update/Add or remove information on a specific malaria type.</p>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#MalariaType">Update</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveMalaria">Remove</button>
+                            </div>
+                        </div>&nbsp;
+                        <div class="card">
+                            <div class="card-header">Symptoms</div>
+                            <div class="card-body">
+                                <p class="card-text">Update/Add or remove information of about a symptom.</p>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddSymptoms">Update</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveSymptoms">Remove</button>
+                            </div>
                         </div>
-                    </div></div>
-                <div class="col auto">
-                <div class="card">
-                        <div class="card-header">
-                            Treatments
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">
-                                Update treatments.
-                            </p>
-                            <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddTreatments">
-                                    Add Treatments
-                             </button>   -->
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateTreatments">
-                                    Update Treatments
+                    </div>&nbsp;</div>
+                    <div class="mx-auto w-20">
+                    <div class="card-colums">
+                            <div class="card">
+                                    <div class="card-header">Treatments</div>
+                                    <div class="card-body">
+                                        <p class="card-text">Update treatments.</p>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateTreatments">Update</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveTreatments">Remove</button>
+                                    </div>
+                                </div>&nbsp;
+                                <div class="card mx-auto  ">
+                                    <div class="card-header">Severities</div>
+                                    <div class="card-body">
+                                        <p class="card-text">Add/Update or remove Severities of Malaria in different countries.</p>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateSeverities">Update</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveSeverities">Remove</button>
+                                    </div>
+                                </div></div>
+                    </div>
+                
+                </div>
+            <!-- ******************************************************************************************************************************************************** -->
+            <!-- Modal Register -->
+            <div class="modal fade" id="Register" tabindex="-1" role="dialog" aria-labelledby="Register" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Register</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                </div>  </div>
-            </div>
-            <div class="row">
-                <div class="col auto">
-                        <div class="card">
-                                <div class="card-header">
-                                    Severities
+                        <div class="modal-body">
+                            <form [formGroup]="userRegistration"  novalidate>
+                                <div *ngIf="userRegistration.controls['username'].invalid && (userRegistration.controls['username'].dirty || userRegistration.controls['username'].touched)" class="alert alert-danger">
+                                    <div *ngIf="userRegistration.controls['username'].errors.required">Name is required.</div>
                                 </div>
-                                <div class="card-body">
-                                    <p class="card-text">
-                                        Add or remove Severities of Malaria in different countries.
-                                    </p>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateSeverities">
-                                            Update Severities
-                                    </button>  
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveSeverities">
-                                            Remove Severities
-                                    </button>
-                                </div>
-                        </div>  
-                </div>     
-                <div class="col auto">
-                        <div class="card">
-                                <div class="card-header">
-                                    Severities
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text">
-                                        Update the prevention techniques for a specific country
-                                    </p>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Prevention">
-                                            Update Prevention
-                                    </button>
-                                </div>
-                        </div> 
-                </div>    
-                <div class="col auto">
-                        <div class="card">
-                                <div class="card-header">
-                                    Malaria Types
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text">
-                                        Update information of a specific Malaria type.
-                                    </p>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#MalariaType">
-                                            Update Malaria Types
-                                    </button>
-                                </div>
-                        </div> 
-                </div>    
-            </div>
-    </div>
-    
-          
-    <!-- Modal Register -->
-    <div class="modal fade" id="Register" tabindex="-1" role="dialog" aria-labelledby="Register" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Register</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-                <form [formGroup]="userRegistration" (ngSubmit)="onSubmit()">
-                        <div class="form-group">
-                          <label for="userName">Username</label>
-                          <input type="text" class="form-control" formControlName="username" id="userName" placeholder="Enter username">
-                        </div>
-                        <div class="form-group">
-                          <label for="password">Password</label>
-                          <input type="password" class="form-control" formControlName="password" id="password" placeholder="Password">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Register</button>
-                    </form><br>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-        </div>
-    </div>
-    </div>
-
-     <!-- Modal Countries -->
-     <div class="modal fade" id="UpdateCountries" tabindex="-1" role="dialog" aria-labelledby="UpdateCountries" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Update Countries</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                        <form [formGroup]="countryUpdate" (ngSubmit)="onSubmit()">
-                                <div class="form-group">
-                                  <label for="name">Name</label>
-                                  <input type="text" class="form-control" formControlName="name" id="name" placeholder="Enter name of country">
+                                <div *ngIf="userRegistration.controls['password'].invalid && (userRegistration.controls['password'].dirty || userRegistration.controls['password'].touched)" class="alert alert-danger">
+                                    <div *ngIf="userRegistration.controls['password'].errors.required">Password is required.</div>
                                 </div>
                                 <div class="form-group">
-                                  <label for="types">Malaria Types</label>
-                                  <textarea rows = "3" cols = "60" class="form-control" formControlName="types" id="types" placeholder="Comma seperated list"></textarea>
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" formControlName="username"  placeholder="Enter username">
                                 </div>
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </form><br>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" formControlName="password" placeholder="Password">
+                                </div>
+                                <button type="submit" (click)="onSubmit('userRegistration')" data-dismiss="modal" class="btn btn-primary" [disabled]="!userRegistration.valid">Register</button>
+                            </form>
+                            <br>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            </div>
-    
+            <!-- ****************************************************************************************************************************************************** -->
             <!-- Modal Countries -->
-     <div class="modal fade" id="RemoveCountries" tabindex="-1" role="dialog" aria-labelledby="RemoveCountries" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Remove Countries</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                        <form [formGroup]="userRegistration" (ngSubmit)="onSubmit()">
+            <div class="modal fade" id="UpdateCountries" tabindex="-1" role="dialog" aria-labelledby="UpdateCountries" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Update Countries</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form [formGroup]="countryAddUpdate"  novalidate>
+                                <div *ngIf="countryAddUpdate.controls['name'].invalid && (countryAddUpdate.controls['name'].dirty || countryAddUpdate.controls['name'].touched)" class="alert alert-danger">
+                                    <div *ngIf="countryAddUpdate.controls['name'].errors.required">Name is required.</div>
+                                </div>
                                 <div class="form-group">
-                                        <label for="name">Name</label>
-                                        <input type="text" class="form-control" formControlName="name" id="name" placeholder="Enter name of country">
-                                      </div>
-                                <button type="submit" class="btn btn-primary">Remove</button>
-                            </form><br>
+                                    <label for="id">Id</label>
+                                    <input type="text" class="form-control" formControlName="id"  placeholder="Enter Id of country for update.">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" formControlName="name"  placeholder="Enter name of country">
+                                </div>
+                                <div class="form-group">
+                                    <label for="types">Malaria Types</label>
+                                    <textarea rows="3" cols="60" class="form-control" formControlName="typeM"  placeholder="Comma seperated list"></textarea>
+                                </div>
+                                <button type="submit" (click)="onSubmit('UpdateCountries')" class="btn btn-primary" data-dismiss="modal" >Update</button>
+                            </form>
+                            <br>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            </div>
-
-     <!-- Modal Treatments -->
-     <div class="modal fade" id="UpdateTreatments" tabindex="-1" role="dialog" aria-labelledby="UpdateTreatments" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Update Treatments</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                        <form [formGroup]="UpdateTreatments" (ngSubmit)="onSubmit()">
+            <!-- ****************************************************************************************************************************************************** -->
+            <!-- Modal Countries -->
+            <div class="modal fade" id="RemoveCountries" tabindex="-1" role="dialog" aria-labelledby="RemoveCountries" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Remove Countries</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form [formGroup]="RemoveCountries"  novalidate>
+                                    <div *ngIf="RemoveCountries.controls['id'].invalid && (RemoveCountries.controls['id'].dirty || RemoveCountries.controls['id'].touched)" class="alert alert-danger">
+                                            <div *ngIf="RemoveCountries.controls['id'].errors.required">Name is required.</div>
+                                        </div>
                                 <div class="form-group">
-                                        <label for="name">Name</label>
-                                        <input type="text" class="form-control" formControlName="name" id="name" placeholder="Enter name of Treatment">
+                                   
+                                    <label for="id">ID</label>
+                                    <input type="number" class="form-control" formControlName="id"  placeholder="Enter id of country">
                                 </div>
-                                <div class="form-group">
-                                        <label for="description">Description</label>
-                                        <textarea rows = "3" cols = "60" class="form-control" formControlName="description" id="description" placeholder="Enter description of the treatement"></textarea>
-                                </div>
-                                <div class="form-group">
-                                        <label for="type">Treatment Type</label>
-                                        <input type="number" class="form-control" formControlName="type" id="type" placeholder="Treatment number">
-                                </div>
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </form><br>
+                                <button type="submit" (click)="onSubmit('removeCountries')" class="btn btn-primary" data-dismiss="modal" [disabled]="!RemoveCountries.valid">Remove</button>
+                            </form>
+                            <br>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-                </div>
-            </div>
-    </div>
-
-     <!-- Modal Treatments -->
-     <!-- <div class="modal fade" id="AddTreatments" tabindex="-1" role="dialog" aria-labelledby="AddTreatments" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Add Treatments</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Update</button>
-                </div>
-                </div>
-            </div>
-    </div> -->
-    <!-- Modal Severities -->
-    <div class="modal fade" id="UpdateSeverities" tabindex="-1" role="dialog" aria-labelledby="UpdateSeverities" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Update Severity</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body"> 
-                    <form [formGroup]="UpdateSeverity" (ngSubmit)="onSubmit()">
-                        <div class="form-group">
-                                <label for="level">Level</label>
-                                <input type="number" class="form-control" formControlName="level" id="level" placeholder="Enter level of severity you wish to update">
                         </div>
-                        <div class="form-group">
-                                <label for="description">Description</label>
-                                <textarea rows = "3" cols = "60" class="form-control" formControlName="description" id="description" placeholder="Enter description of the treatement"></textarea>
-                        </div>
-                        <div class="form-group">
-                                <label for="preventions">Preventions</label>
-                                <input type="number" class="form-control" formControlName="type" id="type" placeholder="Treatment number">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Update</button>
-                    </form><br>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+                    </div>
                 </div>
             </div>
-            </div>
-     <!-- Modal Severities -->
-     <div class="modal fade" id="RemoveSeverities" tabindex="-1" role="dialog" aria-labelledby="RemoveSeverities" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Remove Severity</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                        <form [formGroup]="RemoveSeverities" (ngSubmit)="onSubmit()">
-                                <div class="form-group">
-                                        <label for="level">Level</label>
-                                        <input type="number" class="form-control" formControlName="level" id="level" placeholder="Enter level of severity you wish to remove">
+            <!-- ****************************************************************************************************************************************************** -->
+            <!-- Modal Treatments -->
+            <div class="modal fade" id="UpdateTreatments" tabindex="-1" role="dialog" aria-labelledby="UpdateTreatments" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Update Treatments</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form [formGroup]="updateAddTreatments"  novalidate>
+                                <div *ngIf="updateAddTreatments.controls['name'].invalid && (updateAddTreatments.controls['name'].dirty || updateAddTreatments.controls['name'].touched)" class="alert alert-danger">
+                                    <div *ngIf="updateAddTreatments.controls['name'].errors.required">Name is required.</div>
                                 </div>
-                                
-                                <button type="submit" class="btn btn-primary">Remove</button>
-                            </form><br>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-                </div>
-            </div>
-            </div>
-     <!-- Modal Prevention -->
-     <div class="modal fade" id="Prevention" tabindex="-1" role="dialog" aria-labelledby="Prevention" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle"> Update Prevention</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                        <form [formGroup]="updatePrevention" (ngSubmit)="onSubmit()">
+                                <div *ngIf="updateAddTreatments.controls['description'].invalid && (updateAddTreatments.controls['description'].dirty || updateAddTreatments.controls['description'].touched)" class="alert alert-danger">
+                                    <div *ngIf="updateAddTreatments.controls['description'].errors.required">Description is required.</div>
+                                </div>
+                              
                                 <div class="form-group">
-                                        <label for="name">name</label>
-                                        <input type="text" class="form-control" formControlName="name" id="name" placeholder="Enter name of prevention you wish to update">
+                                    <label for="id">ID</label>
+                                    <input type="text" class="form-control" formControlName="id"  placeholder="Enter Id of Treatment">
                                 </div>
                                 <div class="form-group">
-                                        <label for="description">Description</label>
-                                        <textarea rows = "3" cols = "60" class="form-control" formControlName="description" id="description" placeholder="Enter description of the prevention"></textarea>        
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" formControlName="name"  placeholder="Enter name of Treatment">
                                 </div>
-                                
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </form><br>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-                </div>
-            </div>
-    </div>
-      <!-- Modal MalariaType -->
-      <div class="modal fade" id="MalariaType" tabindex="-1" role="dialog" aria-labelledby="MalariaType" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Update Malria Types</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                </div>
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea rows="3" cols="60" class="form-control" formControlName="description"  placeholder="Enter description of the treatement"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="type">Treatment Type</label>
+                                    <input type="number" class="form-control" formControlName="type"  placeholder="Treatment number">
+                                </div>
+                                <button type="submit" (click)="onSubmit('UpdateTreatments')" class="btn btn-primary" data-dismiss="modal" >Update</button>
+                            </form>
+                            <br>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-    </div>
-
-<!-- </div> -->
+            <!-- ****************************************************************************************************************************************************** -->
+            <!-- Modal Treatments -->
+            <div class="modal fade" id="RemoveTreatments" tabindex="-1" role="dialog" aria-labelledby="RemoveTreatments" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Remove Treatments</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form [formGroup]="RemoveTreatments"  novalidate>
+                                <div class="form-group">
+                                    <div *ngIf="RemoveTreatments.controls['name'].invalid && (RemoveTreatments.controls['name'].dirty || RemoveTreatments.controls['name'].touched)" class="alert alert-danger">
+                                        <div *ngIf="RemoveTreatments.controls['name'].errors.required">Name is required.</div>
+                                    </div>
+                                    <label for="name">ID</label>
+                                    <input type="number" class="form-control" formControlName="name"  placeholder="Enter ID of treatment">
+                                </div>
+                                <button type="submit" (click)="onSubmit('RemoveTreatments')" class="btn btn-primary" data-dismiss="modal" [disabled]="!RemoveTreatments.valid">Remove</button>
+                            </form>
+                            <br>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ****************************************************************************************************************************************************** -->
+            <!-- Modal Severities -->
+            <div class="modal fade" id="UpdateSeverities" tabindex="-1" role="dialog" aria-labelledby="UpdateSeverities" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Update Severity</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form [formGroup]="updateAddSeverities" novalidate>
+                                <div *ngIf="updateAddSeverities.controls['level'].invalid && (updateAddSeverities.controls['level'].dirty || updateAddSeverities.controls['level'].touched)" class="alert alert-danger">
+                                    <div *ngIf="updateAddSeverities.controls['level'].errors.required">Level is required.</div>
+                                </div>
+                                <div *ngIf="updateAddSeverities.controls['description'].invalid && (updateAddSeverities.controls['description'].dirty || updateAddSeverities.controls['description'].touched)" class="alert alert-danger">
+                                    <div *ngIf="updateAddSeverities.controls['description'].errors.required">Description is required.</div>
+                                </div>
+                                <div *ngIf="updateAddSeverities.controls['type'].invalid && (updateAddSeverities.controls['type'].dirty || updateAddSeverities.controls['type'].touched)" class="alert alert-danger">
+                                    <div *ngIf="updateAddSeverities.controls['type'].errors.required">Type is required.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="level">Level</label>
+                                    <input type="number" class="form-control" formControlName="level"  placeholder="Enter level of severity you wish to update">
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea rows="3" cols="60" class="form-control" formControlName="description"  placeholder="Enter description of the treatement"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="preventions">Preventions</label>
+                                    <input type="text" class="form-control" formControlName="type" id="type" placeholder="Treatment number">
+                                </div>
+                                <button type="submit" (click)="onSubmit('UpdateSeverities')"  class="btn btn-primary" data-dismiss="modal" [disabled]="!updateAddSeverities.valid">Update</button>
+                            </form>
+                            <br>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ****************************************************************************************************************************************************** -->
+            <!-- Modal Severities -->
+            <div class="modal fade" id="RemoveSeverities" tabindex="-1" role="dialog" aria-labelledby="RemoveSeverities" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Remove Severity</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form [formGroup]="RemoveSeverities" novalidate>
+                                <div class="form-group">
+                                    <div *ngIf="RemoveSeverities.controls['level'].invalid && (RemoveSeverities.controls['level'].dirty || RemoveSeverities.controls['level'].touched)" class="alert alert-danger">
+                                        <div *ngIf="RemoveSeverities.controls['level'].errors.required">Level of severity is required.</div>
+                                    </div>
+                                    <label for="level">Level</label>
+                                    <input type="number" class="form-control" formControlName="level" placeholder="Enter level of severity you wish to remove">
+                                </div>
+                                <button type="submit" (click)="onSubmit('RemoveSeverities')" class="btn btn-primary" data-dismiss="modal" [disabled]="!RemoveSeverities.valid">Remove</button>
+                            </form>
+                            <br>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ****************************************************************************************************************************************************** -->
+            <!-- Modal Prevention -->
+            <div class="modal fade" id="Prevention" tabindex="-1" role="dialog" aria-labelledby="Prevention" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle"> Update Prevention</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form [formGroup]="updateAddPreventions" novalidate>
+                                <div *ngIf="updateAddPreventions.controls['name'].invalid && (updateAddPreventions.controls['name'].dirty || updateAddPreventions.controls['name'].touched)" class="alert alert-danger">
+                                    <div *ngIf="updateAddPreventions.controls['name'].errors.required">Name is required.</div>
+                                </div>
+                                <div *ngIf="updateAddPreventions.controls['description'].invalid && (updateAddPreventions.controls['description'].dirty || updateAddPreventions.controls['description'].touched)" class="alert alert-danger">
+                                    <div *ngIf="updateAddPreventions.controls['description'].errors.required">Description is required.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="id">ID</label>
+                                    <input type="text" class="form-control" formControlName="id"  placeholder="Enter the ID">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">name</label>
+                                    <input type="text" class="form-control" formControlName="name" placeholder="Enter name of prevention you wish to update">
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea rows="3" cols="60" class="form-control" formControlName="description" id="description" placeholder="Enter description of the prevention"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Severities</label>
+                                    <textarea rows="3" cols="60" class="form-control" formControlName="severityNum"  placeholder="Enter comma seperated list of the severity number"></textarea>
+                                </div>
+                                <button type="submit" (click)="onSubmit('updatePreventions')"  class="btn btn-primary" data-dismiss="modal" [disabled]="!updateAddPreventions.valid">Update</button>
+                            </form>
+                            <br>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ****************************************************************************************************************************************************** -->
+            <div class="modal fade" id="RemovePrevention" tabindex="-1" role="dialog" aria-labelledby="RemovePrevention" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Remove Prevention</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form [formGroup]="RemovePreventions"  novalidate>
+                                <div *ngIf="RemovePreventions.controls['name'].invalid && (RemovePreventions.controls['name'].dirty || RemovePreventions.controls['name'].touched)" class="alert alert-danger">
+                                    <div *ngIf="RemovePreventions.controls['name'].errors.required">Name is required.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">ID</label>
+                                    <input type="number" class="form-control" formControlName="name"  placeholder="Enter id of prevention">
+                                </div>
+                                <button type="submit"  (click)="onSubmit('RemovePrevention')" class="btn btn-primary" data-dismiss="modal" [disabled]="!RemovePreventions.valid">Remove</button>
+                            </form>
+                            <br>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ****************************************************************************************************************************************************** -->
+            <!-- Modal MalariaType -->
+            <div class="modal fade" id="MalariaType" tabindex="-1" role="dialog" aria-labelledby="MalariaType" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Update Malria Types</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form [formGroup]="updateAddMalariaTypes"  novalidate>
+                                <div *ngIf="updateAddMalariaTypes.controls['name'].invalid && (updateAddMalariaTypes.controls['name'].dirty || updateAddMalariaTypes.controls['name'].touched)" class="alert alert-danger">
+                                    <div *ngIf="updateAddMalariaTypes.controls['name'].errors.required">Name is required.</div>
+                                </div>
+                                <div *ngIf="updateAddMalariaTypes.controls['description'].invalid && (updateAddMalariaTypes.controls['description'].dirty || updateAddMalariaTypes.controls['description'].touched)" class="alert alert-danger">
+                                    <div *ngIf="updateAddMalariaTypes.controls['description'].errors.required">Description is required.</div>
+                                </div>
+                                <div *ngIf="updateAddMalariaTypes.controls['level'].invalid && (updateAddMalariaTypes.controls['level'].dirty || updateAddMalariaTypes.controls['level'].touched)" class="alert alert-danger">
+                                    <div *ngIf="updateAddMalariaTypes.controls['level'].errors.required">Level is required.</div>
+                                </div>
+                                <div *ngIf="updateAddMalariaTypes.controls['Treatments'].invalid && (updateAddMalariaTypes.controls['Treatments'].dirty || updateAddMalariaTypes.controls['Treatments'].touched)" class="alert alert-danger">
+                                    <div *ngIf="updateAddMalariaTypes.controls['Treatments'].errors.required">Treatments is required.</div>
+                                </div>
+                                <div *ngIf="updateAddMalariaTypes.controls['Symptoms'].invalid && (updateAddMalariaTypes.controls['Symptoms'].dirty || updateAddMalariaTypes.controls['Symptoms'].touched)" class="alert alert-danger">
+                                    <div *ngIf="updateAddMalariaTypes.controls['Symptoms'].errors.required">Symptoms is required.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="id">ID</label>
+                                    <input type="number" class="form-control" formControlName="id"  placeholder="Enter id of Malaria">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" formControlName="name" placeholder="Enter name of Malaria">
+                                </div>
+                                <div class="form-group">
+                                    <label for="level">Severity</label>
+                                    <input type="number" class="form-control" formControlName="level"  placeholder="Enter level of severity ">
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea rows="3" cols="60" class="form-control" formControlName="description"  placeholder="Enter description of the malaria"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Treatments">Treatments</label>
+                                    <input type="text" class="form-control" formControlName="Treatments"  placeholder="Treatment number comma seperated">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Symptoms">Symptoms</label>
+                                    <input type="text" class="form-control" formControlName="Symptoms"  placeholder="Symptoms number comma seperated">
+                                </div>
+                                <button type="submit" (click)="onSubmit('updateAddMalariaTypes')" class="btn btn-primary" data-dismiss="modal" [disabled]="!updateAddMalariaTypes.valid">Update</button>
+                            </form>
+                            <br>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ****************************************************************************************************************************************************** -->
+            <div class="modal fade" id="RemoveMalaria" tabindex="-1" role="dialog" aria-labelledby="RemoveMalaria" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Remove Malaria Type</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form [formGroup]="RemoveMalaria"  novalidate>
+                                <div *ngIf="RemoveMalaria.controls['name'].invalid && (RemoveMalaria.controls['name'].dirty || RemoveMalaria.controls['name'].touched)" class="alert alert-danger">
+                                    <div *ngIf="RemoveMalaria.controls['name'].errors.required">Name is required.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="number" class="form-control" formControlName="name"  placeholder="Enter name of malaria">
+                                </div>
+                                <button type="submit" (click)="onSubmit('RemoveMalaria')" class="btn btn-primary" data-dismiss="modal" [disabled]="!RemoveMalaria.valid">Remove</button>
+                            </form>
+                            <br>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ****************************************************************************************************************************************************** -->
+            <div class="modal fade" id="RemoveSymptoms" tabindex="-1" role="dialog" aria-labelledby="RemoveSymptoms" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Remove Symptoms</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form [formGroup]="RemoveSymptoms"  novalidate>
+                                <div *ngIf="RemoveSymptoms.controls['name'].invalid && (RemoveSymptoms.controls['name'].dirty || RemoveSymptoms.controls['name'].touched)" class="alert alert-danger">
+                                    <div *ngIf="RemoveSymptoms.controls['name'].errors.required">Name is required.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="number" class="form-control" formControlName="name"  placeholder="Enter name of symptom">
+                                </div>
+                                <button type="submit"  (click)="onSubmit('removeSymptom')"class="btn btn-primary" data-dismiss="modal" [disabled]="!RemoveSymptoms.valid">Remove</button>
+                            </form>
+                            <br>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ****************************************************************************************************************************************************** -->
+            <div class="modal fade" id="AddSymptoms" tabindex="-1" role="dialog" aria-labelledby="AddSymptoms" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">update Symptoms</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form [formGroup]="updateAddSymptoms"  novalidate>
+                                <div *ngIf="updateAddSymptoms.controls['name'].invalid && (updateAddSymptoms.controls['name'].dirty || updateAddSymptoms.controls['name'].touched)" class="alert alert-danger">
+                                    <div *ngIf="updateAddSymptoms.controls['name'].errors.required">Name is required.</div>
+                                </div>
+                                <div *ngIf="updateAddSymptoms.controls['description'].invalid && (updateAddSymptoms.controls['description'].dirty || updateAddSymptoms.controls['description'].touched)" class="alert alert-danger">
+                                    <div *ngIf="updateAddSymptoms.controls['description'].errors.required">Description is required.</div>
+                                </div>
+                                <div *ngIf="updateAddSymptoms.controls['sType'].invalid && (updateAddSymptoms.controls['sType'].dirty || updateAddSymptoms.controls['sType'].touched)" class="alert alert-danger">
+                                    <div *ngIf="updateAddSymptoms.controls['sType'].errors.required">Symptom Type is required.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="id">ID</label>
+                                    <input type="number" class="form-control" formControlName="id"  placeholder="Enter ID">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" formControlName="name"  placeholder="Enter name of symptom">
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea rows="3" cols="60" class="form-control" formControlName="description"  placeholder="Enter description"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sType">Symptom Type</label>
+                                    <input type="number" class="form-control" formControlName="sType"  placeholder="Enter number of symptom type">
+                                </div>
+                                <button type="submit" (click)="onSubmit('updateSymptom')"class="btn btn-primary" data-dismiss="modal" [disabled]="!updateAddSymptoms.valid">Add</button>
+                            </form>
+                            <br>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>

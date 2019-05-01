@@ -9,6 +9,6 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   getMalariaTypes() {
-    return this.http.get('/api/test/malaria-types')
+    return this.http.get('http://infmalariapp.herokuapp.com/malaria-types');
   }
 }

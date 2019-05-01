@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Router, NavigationStart } from '@angular/router';
-import { map, filter, catchError, mergeMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormBuilder,Validators } from '@angular/forms';  
-import { HttpClient } from '@angular/common/http';  
-
+import {TokenManagerService} from "../token-manager.service";
+import { FormManagerService } from '../form-manager.service';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -14,84 +12,182 @@ import { HttpClient } from '@angular/common/http';
 export class AdminComponent implements OnInit {
 
   state$:Object;
-  constructor(public router: Router,private formBuilder: FormBuilder, private http: HttpClient) { }
+  userRegistration: FormGroup;
+  countryAddUpdate: FormGroup;
+  RemoveCountries: FormGroup;
+  updateAddTreatments: FormGroup;
+  RemoveTreatments: FormGroup;
+  updateAddSeverities: FormGroup;
+  RemoveSeverities: FormGroup;
+  updateAddPreventions: FormGroup;
+  RemovePreventions: FormGroup;
+  updateAddMalariaTypes: FormGroup;
+  RemoveMalaria: FormGroup;
+  updateAddSymptoms: FormGroup;
+  RemoveSymptoms: FormGroup;
 
-  userRegistration = new FormGroup({username: new FormControl("",Validators.minLength(5)),password: new FormControl("",Validators.minLength(5))});
-  countryUpdate = new FormGroup({username: new FormControl("",Validators.minLength(5)),password: new FormControl("",Validators.minLength(5))});
-  RemoveCountries = new FormGroup({username: new FormControl("",Validators.minLength(5)),password: new FormControl("",Validators.minLength(5))});
-  UpdateTreatments = new FormGroup({username: new FormControl("",Validators.minLength(5)),password: new FormControl("",Validators.minLength(5))});
-  UpdateSeverity = new FormGroup({username: new FormControl("",Validators.minLength(5)),password: new FormControl("",Validators.minLength(5))});
-  RemoveSeverities = new FormGroup({username: new FormControl("",Validators.minLength(5)),password: new FormControl("",Validators.minLength(5))});
-  updatePrevention = new FormGroup({username: new FormControl("",Validators.minLength(5)),password: new FormControl("",Validators.minLength(5))});
-
-  ngOnInit() {
-    //! getting a state which if send from login should displpay true.
-    //! Without this state$ set the page will not dispay.Do not know how to redirect tho.
-    // this.state$ =  this.router.events.pipe(
-    //   filter(e => e instanceof NavigationStart),
-    //   map(() => this.router.getCurrentNavigation().extras.state)
-    // )
-    // //! IF for some reason you navigate to this page without loggin in
-    // //! it will redirect to login
-    // if(this.state$ != 'true')
-    // {
-    //   this.router.navigate(['login']);
-    // }
-    this.userRegistration = this.formBuilder.group({
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-    });
-    this.countryUpdate = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      types: ['', [Validators.required]],
-    });
-    this.RemoveCountries = this.formBuilder.group({
-      name: ['', [Validators.required]]
-    });
-    this.UpdateTreatments = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      descritpion: ['', [Validators.required]],
-      type: ['', [Validators.required]]
-    });
-    this.UpdateSeverity = this.formBuilder.group({
-      level: ['', [Validators.required]],
-      descritpion: ['', [Validators.required]],
-      type: ['', [Validators.required]]
-    });
-    this.RemoveSeverities = this.formBuilder.group({
-      level: ['', [Validators.required]]
-    });
-    this.updatePrevention = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      descritpion: ['', [Validators.required]],
-    });
-  }
-  onSumbit()
+  constructor(public router: Router,private formBuilder: FormBuilder,private token:TokenManagerService,private callVar:FormManagerService) { }
+  Logout()
   {
-    if(this.userRegistration.valid){
-      //userRegistration part
-    }
-    if(this.countryUpdate.valid){
-      //updating a country part
-    }
-    if(this.RemoveCountries.valid){
-      //removing of a country part
-    }
-    if(this.UpdateTreatments.valid){
-      //updating a treatment part
-    }
-    if(this.UpdateSeverity.valid){
-      //updating severity  part
-    }
-    if(this.RemoveSeverities.valid)
+    this.token.logout();
+    this.router.navigate(['/']);
+  }
+  ngOnInit() 
+  { 
+    if(!this.token.checkTokenSet())
     {
-      //remove a severity level
+      this.router.navigate(['login'])
     }
-    if(this.updatePrevention.valid)
-    {
-
+    else{
+      this.userRegistration = this.formBuilder.group({
+        username: ['', [Validators.required]],
+         password: ['', [Validators.required]],
+       });
+       this.countryAddUpdate = this.formBuilder.group({
+        id:[''],
+        name: ['', [Validators.required]],
+        typeM: ['', [Validators.required]],
+       });
+       this.RemoveCountries = this.formBuilder.group({
+        id: ['', [Validators.required]]
+       });
+       this.updateAddTreatments = this.formBuilder.group({
+        id:[''],
+        name: ['', [Validators.required]],
+        description: ['', [Validators.required]],
+        type:['',[Validators.required]]
+       });
+       this.RemoveTreatments= this.formBuilder.group({
+        name: ['', [Validators.required]]
+       }); 
+       this.updateAddSeverities = this.formBuilder.group({
+        id:[''],
+        level: ['', [Validators.required]],
+        description: ['', [Validators.required]],
+        type:['',[Validators.required]]
+       });
+       this.RemoveSeverities= this.formBuilder.group({
+        level: ['', [Validators.required]]
+       }); 
+       this.updateAddPreventions = this.formBuilder.group({
+        id:[''],
+        name: ['', [Validators.required]],
+        description: ['', [Validators.required]],
+        severityNum:['',[Validators.required]]
+       });
+       this.RemovePreventions= this.formBuilder.group({
+        name: ['', [Validators.required]]
+       });
+       this.updateAddMalariaTypes = this.formBuilder.group({
+        id:[''],
+        name:['',[Validators.required]],
+        level: ['', [Validators.required]],
+        description: ['', [Validators.required]],
+        Treatments:['',[Validators.required]],
+        Symptoms:['',[Validators.required]]
+       });
+       this.RemoveMalaria= this.formBuilder.group({
+        name: ['', [Validators.required]]
+       });
+       this.RemoveSymptoms= this.formBuilder.group({
+        name: ['', [Validators.required]]
+       });
+       this.updateAddSymptoms = this.formBuilder.group({
+        id:[''],
+        name:['',[Validators.required]],
+        description: ['', [Validators.required]],
+        sType:['',[Validators.required]]
+       });
     }
   }
+  onSubmit(buttonType)
+  {
+    if(buttonType==="userRegistration")
+    {
+      var obj = {"username":this.userRegistration.controls["username"].value,"password":this.userRegistration.controls["password"].value};
+      var type= 'register';
+      this.callVar.doApiCall(this.token.retrieve(),obj,type);
+      // console.log(obj['password'].value);
+    }
+    else if(buttonType==="UpdateCountries")
+    {
+      var seperate = this.countryAddUpdate.controls["typeM"].value.split(',');
+      var objTwo = {"id":this.countryAddUpdate.controls["id"].value,"name":this.countryAddUpdate.controls["name"].value,"malariaTypes":seperate};
+      var type= 'update-country';
+      this.callVar.doApiCall(this.token.retrieve(),objTwo,type);
+    }
+    else if(buttonType==="removeCountries")
+    {
+      var objThree = {"id":this.RemoveCountries.controls["id"].value};
+      var type= 'delete-country';
+      this.callVar.doApiCall(this.token.retrieve(),objThree,type);
+    }
+    else if(buttonType==="UpdateTreatments")
+    {
+      var objFour = {"id":this.updateAddTreatments.controls["id"].value,"name":this.updateAddTreatments.controls["name"].value,"description":this.updateAddTreatments.controls["description"].value,"treatmentType":this.updateAddTreatments.controls["type"].value};
+      var type= 'update-treatment';
+      this.callVar.doApiCall(this.token.retrieve(),objFour,type);
+    }
+    else if(buttonType==="RemoveTreatments")
+    {
+      var objFive = {"id":this.RemoveTreatments.controls["name"].value};
+      var type="delete-treatment";
+      this.callVar.doApiCall(this.token.retrieve(),objFive,type);
+    }
+    else if(buttonType==="UpdateSeverities")  
+    {
+      var seperateTwo = this.updateAddSeverities.controls["type"].value.split(',');
+      var objSix = {"level":this.updateAddSeverities.controls["level"].value,"description":this.updateAddSeverities.controls["description"].value,"preventions":seperateTwo};
+      var type="update-severity";
+      this.callVar.doApiCall(this.token.retrieve(),objSix,type);
+    }
+    else if(buttonType==="RemoveSeverities")
+    {
+      var objSeven = {"level":this.RemoveSeverities.controls["level"].value};
+      var type="delete-severity";
+      this.callVar.doApiCall(this.token.retrieve(),objSeven,type);
+    }
+    else if(buttonType==="updatePreventions")
+    {
+      var seperateThree = this.updateAddPreventions.controls["severityNum"].value.split(',');
+      var objEight = {"id":this.updateAddPreventions.controls["id"].value,"name":this.updateAddPreventions.controls["name"].value,"description":this.updateAddPreventions.controls["description"].value,"severities":seperateThree};
+      var type="update-prevention";
+      this.callVar.doApiCall(this.token.retrieve(),objEight,type);
+    }
+    else if(buttonType==="RemovePrevention")
+    {
+      var objNine = {"id":this.RemovePreventions.controls["name"].value};
+      var type="delete-prevention";
+      this.callVar.doApiCall(this.token.retrieve(),objNine,type);
+    }
+    else if(buttonType==="updateAddMalariaTypes")
+    {
+      var seperateFour = this.updateAddMalariaTypes.controls["Treatments"].value.split(',');
+      var seperateFive = this.updateAddMalariaTypes.controls["Symptoms"].value.split(',');
+      var objTen = {"id":this.updateAddMalariaTypes.controls["id"].value,"name":this.updateAddMalariaTypes.controls["name"].value,"description":this.updateAddMalariaTypes.controls["description"].value,"severity":this.updateAddMalariaTypes.controls["level"].value,"treatments":seperateFour,"symptoms":seperateFive};
+      var type="update-malaria-type";
+      this.callVar.doApiCall(this.token.retrieve(),objTen,type);
+    }
+    else if(buttonType==="RemoveMalaria")
+    {
+      var objEleven = {"id":this.RemoveMalaria.controls["name"].value};
+      var type="delete-malaria-type";
+      this.callVar.doApiCall(this.token.retrieve(),objEleven,type);
+    }
+    else if(buttonType==="removeSymptom")
+    {
+      var objTwelve = {"id":this.RemoveSymptoms.controls["name"].value};
+      var type="delete-symptom";
+      this.callVar.doApiCall(this.token.retrieve(),objTwelve,type);
+    }
+    else if(buttonType==="updateSymptom")
+    {
+      var objThirteen={"id":this.updateAddSymptoms.controls["id"].value,"name":this.updateAddSymptoms.controls["name"].value,"description":this.updateAddSymptoms.controls["description"].value,"symptomType":this.updateAddSymptoms.controls["sType"].value};
+      var type="update-symptom";
+      this.callVar.doApiCall(this.token.retrieve(),objThirteen,type);
+    }
+  }
+   
 }
 
 
