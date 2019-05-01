@@ -574,3 +574,10 @@
                     </div>
                 </div>
             </div>
+            <ng-container *ngIf="this.first">                
+            <ng-container *ngIf="this.callVar.displayMessage;else elseblock">
+                    <p class="alert alert-success">Operation executed successfully</p>
+                    <ng-template #elseBlock> <p class="alert alert-danger">An error occured during the execution of the operation</p></ng-template>
+            </ng-container>
+            
+        </ng-container>

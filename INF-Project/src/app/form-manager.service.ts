@@ -6,11 +6,18 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FormManagerService {
 
+  public displayMessage:boolean=false;
+  public mesage:string;
   constructor(private http: HttpClient) { }
   doApiCall(token,obj,type)
   {
     return this.http.post("http://infmalariapp.herokuapp.com/"+type+"?token="+token,obj).subscribe((response)=>{
-
+      this.mesage="Operation Succesfully executed";
+      this.displayMessage = true;
+    },(err)=>
+    {
+      this.mesage="An error occured while executing operation";
+      this.displayMessage = false;
     });
   }
   getCountries()

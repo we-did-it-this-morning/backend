@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormBuilder,Validators } from '@angular/forms';  
-import { HttpClient } from '@angular/common/http';  
+import { HttpClient, HttpResponse } from '@angular/common/http';  
 import { Router } from '@angular/router';
 import {TokenManagerService} from '../token-manager.service';
 
@@ -13,6 +13,7 @@ import {TokenManagerService} from '../token-manager.service';
 export class LoginComponent implements OnInit {
 
   userInfo:FormGroup;
+  public login:boolean =true;
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient,private _router: Router,private token:TokenManagerService) { } 
 
@@ -42,6 +43,11 @@ export class LoginComponent implements OnInit {
         {
           this._router.navigate(['admin']);
         }
+      },(err)=>
+      {
+        this.login=false;
+        console.log("User is unauthorized");
+
       });
     }
   }

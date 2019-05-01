@@ -9,6 +9,9 @@
     </div>
 </div>
 <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <ng-container *ngIf="!login">
+                <p class="alert alert-danger">Username or password is incorrect</p>
+            </ng-container>
 <div class="text-center">
 <form [formGroup]="userInfo"  novalidate>
     <div *ngIf="userInfo.controls['userName'].invalid && (userInfo.controls['userName'].dirty || userInfo.controls['userName'].touched)" class="alert alert-danger">

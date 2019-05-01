@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
 import { NavComponent } from './nav/nav.component';
 import { LoginComponent } from './login/login.component';
+import { CommonModule } from '@angular/common';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -21,7 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule, HttpClientModule,  ReactiveFormsModule 
+    AppRoutingModule, HttpClientModule,  ReactiveFormsModule,CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

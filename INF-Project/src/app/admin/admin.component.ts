@@ -12,6 +12,7 @@ import { FormManagerService } from '../form-manager.service';
 export class AdminComponent implements OnInit {
 
   state$:Object;
+  first:boolean=false;
   userRegistration: FormGroup;
   countryAddUpdate: FormGroup;
   RemoveCountries: FormGroup;
@@ -109,11 +110,13 @@ export class AdminComponent implements OnInit {
   }
   onSubmit(buttonType)
   {
+    this.first = true;
     if(buttonType==="userRegistration")
     {
       var obj = {"username":this.userRegistration.controls["username"].value,"password":this.userRegistration.controls["password"].value};
       var type= 'register';
       this.callVar.doApiCall(this.token.retrieve(),obj,type);
+   
       // console.log(obj['password'].value);
     }
     else if(buttonType==="UpdateCountries")
