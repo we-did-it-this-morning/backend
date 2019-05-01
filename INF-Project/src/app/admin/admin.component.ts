@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit,NgZone} from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormBuilder,Validators } from '@angular/forms';  
@@ -37,7 +37,7 @@ export class AdminComponent implements OnInit {
   listSymptomTypes:Object;
   listTreatmentTypes:Object;
 
-  constructor(public router: Router,private formBuilder: FormBuilder,private token:TokenManagerService,private callVar:FormManagerService) { }
+  constructor(private _ngZone: NgZone,public router: Router,private formBuilder: FormBuilder,private token:TokenManagerService,private callVar:FormManagerService) { }
   Logout()
   {
     this.token.logout();
@@ -226,7 +226,7 @@ export class AdminComponent implements OnInit {
       var type="update-symptom";
       this.callVar.doApiCall(this.token.retrieve(),objThirteen,type);
     }
-    // this.populateList();
+     this.populateList();
   }
   populateList()
   {
@@ -262,6 +262,7 @@ export class AdminComponent implements OnInit {
     {      
       this.listTreatmentTypes = data['data'];   
     });
+    this._ngZone.run(() => {});
   }
    
 }
