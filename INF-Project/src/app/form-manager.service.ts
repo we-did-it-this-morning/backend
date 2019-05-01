@@ -13,4 +13,28 @@ export class FormManagerService {
 
     });
   }
+  getCountries()
+  {
+    return this.http.get("http://infmalariapp.herokuapp.com/countries");
+  }
+  getTreatments()
+  {
+    return this.http.get("http://infmalariapp.herokuapp.com/treatments");
+  }
+  getPreventions()
+  {
+    return this.http.get("http://infmalariapp.herokuapp.com/preventions");
+  }
+  getSeverities()
+  {
+    return this.http.get("http://infmalariapp.herokuapp.com/severities");
+  }
+  getSymptoms()
+  {
+    return this.http.get("http://infmalariapp.herokuapp.com/symptoms");
+  }
+  getMalaria()
+  {
+    return this.http.get("http://infmalariapp.herokuapp.com/malaria-types");
+  }
 }

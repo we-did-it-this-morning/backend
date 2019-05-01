@@ -1,15 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Malaria</a>
+    <a class="navbar-brand" href="/admin">Malaria</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
+        
         <li class="nav-item">
-          <a class="nav-link" routerLink="/">Malaria Info</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="Logout()">Logout</a>
+          <a class="nav-link" href="/login" (click)="Logout()">Logout</a>
         </li>
       </ul>
     </div>
@@ -39,7 +37,7 @@
                             <div class="card-header">Countries</div>
                             <div class="card-body">
                                 <p class="card-text">Update or remove countries from the list.</p>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateCountries">Update</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateCountries">Update</button>&nbsp;
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveCountries">Remove</button>
                             </div>
                         </div>
@@ -51,7 +49,7 @@
                             <div class="card-header">Preventions</div>
                             <div class="card-body">
                                 <p class="card-text">Update/Add or remove prevention techniques for a specific country</p>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Prevention">Update</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Prevention">Update</button>&nbsp;
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemovePrevention">Remove</button>
                             </div>
                         </div>&nbsp;
@@ -59,7 +57,7 @@
                             <div class="card-header">Malaria Types</div>
                             <div class="card-body">
                                 <p class="card-text">Update/Add or remove information on a specific malaria type.</p>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#MalariaType">Update</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#MalariaType">Update</button>&nbsp;
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveMalaria">Remove</button>
                             </div>
                         </div>&nbsp;
@@ -67,7 +65,7 @@
                             <div class="card-header">Symptoms</div>
                             <div class="card-body">
                                 <p class="card-text">Update/Add or remove information of about a symptom.</p>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddSymptoms">Update</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddSymptoms">Update</button>&nbsp;
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveSymptoms">Remove</button>
                             </div>
                         </div>
@@ -78,7 +76,7 @@
                                     <div class="card-header">Treatments</div>
                                     <div class="card-body">
                                         <p class="card-text">Update treatments.</p>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateTreatments">Update</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateTreatments">Update</button>&nbsp;
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveTreatments">Remove</button>
                                     </div>
                                 </div>&nbsp;
@@ -86,7 +84,7 @@
                                     <div class="card-header">Severities</div>
                                     <div class="card-body">
                                         <p class="card-text">Add/Update or remove Severities of Malaria in different countries.</p>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateSeverities">Update</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateSeverities">Update</button>&nbsp;
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RemoveSeverities">Remove</button>
                                     </div>
                                 </div></div>
@@ -144,7 +142,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="id">Id</label>
-                                    <input type="text" class="form-control" formControlName="id"  placeholder="Enter Id of country for update.">
+                                    <select name="id" formControlName="id" >
+                                            <option *ngFor="let item of listCountries"  value='{{ item.id }}'  >{{ item.id }}</option>
+                                        </select>
+                                    <!-- <input type="text" class="form-control" formControlName="id"  placeholder="Enter Id of country for update."> -->
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Name</label>
@@ -180,7 +181,9 @@
                                 <div class="form-group">
                                    
                                     <label for="id">ID</label>
-                                    <input type="number" class="form-control" formControlName="id"  placeholder="Enter id of country">
+                                    <select name="id" formControlName="id" >
+                                            <option *ngFor="let item of listCountries"  value='{{ item.id }}'  >{{ item.id }}</option>
+                                        </select>
                                 </div>
                                 <button type="submit" (click)="onSubmit('removeCountries')" class="btn btn-primary" data-dismiss="modal" [disabled]="!RemoveCountries.valid">Remove</button>
                             </form>
@@ -211,7 +214,9 @@
                               
                                 <div class="form-group">
                                     <label for="id">ID</label>
-                                    <input type="text" class="form-control" formControlName="id"  placeholder="Enter Id of Treatment">
+                                    <select name="id" formControlName="id" >
+                                            <option *ngFor="let item of listTreatments"  value='{{ item.id }}'  >{{ item.id }}</option>
+                                        </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Name</label>
@@ -246,11 +251,13 @@
                         <div class="modal-body">
                             <form [formGroup]="RemoveTreatments"  novalidate>
                                 <div class="form-group">
-                                    <div *ngIf="RemoveTreatments.controls['name'].invalid && (RemoveTreatments.controls['name'].dirty || RemoveTreatments.controls['name'].touched)" class="alert alert-danger">
-                                        <div *ngIf="RemoveTreatments.controls['name'].errors.required">Name is required.</div>
-                                    </div>
+                                    <!-- <div *ngIf="RemoveTreatments.controls['id'].invalid && (RemoveTreatments.controls['id'].dirty || RemoveTreatments.controls['id'].touched)" class="alert alert-danger">
+                                        <div *ngIf="RemoveTreatments.controls['id'].errors.required">Name is required.</div>
+                                    </div> -->
                                     <label for="name">ID</label>
-                                    <input type="number" class="form-control" formControlName="name"  placeholder="Enter ID of treatment">
+                                    <select name="id" formControlName="name" >
+                                            <option *ngFor="let item of listTreatments"  value='{{ item.id }}'  >{{ item.id }}</option>
+                                        </select>
                                 </div>
                                 <button type="submit" (click)="onSubmit('RemoveTreatments')" class="btn btn-primary" data-dismiss="modal" [disabled]="!RemoveTreatments.valid">Remove</button>
                             </form>
@@ -283,7 +290,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="level">Level</label>
-                                    <input type="number" class="form-control" formControlName="level"  placeholder="Enter level of severity you wish to update">
+                                    <select name="id" formControlName="level" >
+                                            <option *ngFor="let item of listSeverities"  value='{{ item.level }}'  >{{ item.level }}</option>
+                                        </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description</label>
@@ -318,7 +327,9 @@
                                         <div *ngIf="RemoveSeverities.controls['level'].errors.required">Level of severity is required.</div>
                                     </div>
                                     <label for="level">Level</label>
-                                    <input type="number" class="form-control" formControlName="level" placeholder="Enter level of severity you wish to remove">
+                                    <select name="id" formControlName="level" >
+                                            <option *ngFor="let item of listSeverities"  value='{{ item.level }}'  >{{ item.level }}</option>
+                                        </select>
                                 </div>
                                 <button type="submit" (click)="onSubmit('RemoveSeverities')" class="btn btn-primary" data-dismiss="modal" [disabled]="!RemoveSeverities.valid">Remove</button>
                             </form>
@@ -348,7 +359,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="id">ID</label>
-                                    <input type="text" class="form-control" formControlName="id"  placeholder="Enter the ID">
+                                    <select name="id" formControlName="id" >
+                                            <option *ngFor="let item of listPreventions"  value='{{ item.id }}'  >{{ item.id }}</option>
+                                        </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="name">name</label>
@@ -386,7 +399,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="name">ID</label>
-                                    <input type="number" class="form-control" formControlName="name"  placeholder="Enter id of prevention">
+                                    <select name="id" formControlName="name" >
+                                            <option *ngFor="let item of listPreventions"  value='{{ item.id }}'  >{{ item.id }}</option>
+                                        </select>
                                 </div>
                                 <button type="submit"  (click)="onSubmit('RemovePrevention')" class="btn btn-primary" data-dismiss="modal" [disabled]="!RemovePreventions.valid">Remove</button>
                             </form>
@@ -425,7 +440,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="id">ID</label>
-                                    <input type="number" class="form-control" formControlName="id"  placeholder="Enter id of Malaria">
+                                    <select name="id" formControlName="id" >
+                                            <option *ngFor="let item of listMalaria"  value='{{ item.id }}'  >{{ item.id }}</option>
+                                        </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Name</label>
@@ -471,7 +488,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Name</label>
-                                    <input type="number" class="form-control" formControlName="name"  placeholder="Enter name of malaria">
+                                    <select name="id" formControlName="name" >
+                                            <option *ngFor="let item of listMalaria"  value='{{ item.id }}'  >{{ item.id }}</option>
+                                        </select>
                                 </div>
                                 <button type="submit" (click)="onSubmit('RemoveMalaria')" class="btn btn-primary" data-dismiss="modal" [disabled]="!RemoveMalaria.valid">Remove</button>
                             </form>
@@ -497,7 +516,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Name</label>
-                                    <input type="number" class="form-control" formControlName="name"  placeholder="Enter name of symptom">
+                                    <select name="id" formControlName="name" >
+                                            <option *ngFor="let item of listSymptoms"  value='{{ item.id }}'  >{{ item.id }}</option>
+                                        </select>
                                 </div>
                                 <button type="submit"  (click)="onSubmit('removeSymptom')"class="btn btn-primary" data-dismiss="modal" [disabled]="!RemoveSymptoms.valid">Remove</button>
                             </form>
@@ -529,7 +550,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="id">ID</label>
-                                    <input type="number" class="form-control" formControlName="id"  placeholder="Enter ID">
+                                    <select name="id" formControlName="id" >
+                                            <option *ngFor="let item of listSymptoms"  value='{{ item.id }}'  >{{ item.id }}</option>
+                                        </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Name</label>

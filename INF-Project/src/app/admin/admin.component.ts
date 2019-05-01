@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormBuilder,Validators } from '@angular/forms';  
@@ -25,6 +25,12 @@ export class AdminComponent implements OnInit {
   RemoveMalaria: FormGroup;
   updateAddSymptoms: FormGroup;
   RemoveSymptoms: FormGroup;
+  listCountries:Object;
+  listPreventions:Object;
+  listMalaria:Object;
+  listSymptoms:Object;
+  listTreatments:Object;
+  listSeverities:Object;
 
   constructor(public router: Router,private formBuilder: FormBuilder,private token:TokenManagerService,private callVar:FormManagerService) { }
   Logout()
@@ -39,6 +45,7 @@ export class AdminComponent implements OnInit {
       this.router.navigate(['login'])
     }
     else{
+      this.populateList();
       this.userRegistration = this.formBuilder.group({
         username: ['', [Validators.required]],
          password: ['', [Validators.required]],
@@ -186,6 +193,33 @@ export class AdminComponent implements OnInit {
       var type="update-symptom";
       this.callVar.doApiCall(this.token.retrieve(),objThirteen,type);
     }
+  }
+  populateList()
+  {
+    this.callVar.getCountries().subscribe((data:Response) =>
+    {      
+      this.listCountries = data['data'];       
+    });
+    this.callVar.getTreatments().subscribe((data:Response) =>
+    {      
+      this.listTreatments = data['data'];       
+    });
+    this.callVar.getPreventions().subscribe((data:Response) =>
+    {      
+      this.listPreventions = data['data'];       
+    });
+    this.callVar.getSeverities().subscribe((data:Response) =>
+    {      
+      this.listSeverities = data['data'];   
+    });
+    this.callVar.getSymptoms().subscribe((data:Response) =>
+    {      
+      this.listSymptoms = data['data'];   
+    });
+    this.callVar.getMalaria().subscribe((data:Response) =>
+    {      
+      this.listMalaria = data['data'];   
+    });
   }
    
 }
