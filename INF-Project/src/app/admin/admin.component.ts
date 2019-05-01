@@ -230,39 +230,39 @@ export class AdminComponent implements OnInit {
   }
   populateList()
   {
-    this.callVar.getCountries().subscribe((data:Response) =>
+    this.callVar.getList("countries").subscribe((data:Response) =>
     {      
       this.listCountries = data['data'];       
     });
-    this.callVar.getTreatments().subscribe((data:Response) =>
+    this.callVar.getList("treatments").subscribe((data:Response) =>
     {      
       this.listTreatments = data['data'];       
     });
-    this.callVar.getPreventions().subscribe((data:Response) =>
+    this.callVar.getList("preventions").subscribe((data:Response) =>
     {      
       this.listPreventions = data['data'];       
     });
-    this.callVar.getSeverities().subscribe((data:Response) =>
+    this.callVar.getList("severities").subscribe((data:Response) =>
     {      
       this.listSeverities = data['data'];   
     });
-    this.callVar.getSymptoms().subscribe((data:Response) =>
+    this.callVar.getList("symptoms").subscribe((data:Response) =>
     {      
       this.listSymptoms = data['data'];   
     });
-    this.callVar.getMalaria().subscribe((data:Response) =>
+    this.callVar.getList("malaria-types").subscribe((data:Response) =>
     {      
       this.listMalaria = data['data'];   
     });
-    this.callVar.getSymptomTypes().subscribe((data:Response) =>
+    this.callVar.getList("symptom-types").subscribe((data:Response) =>
     {      
       this.listSymptomTypes = data['data'];   
     });
-    this.callVar.getTreatmentTypes().subscribe((data:Response) =>
+    this.callVar.getList("treatment-types").subscribe((data:Response) =>
     {      
       this.listTreatmentTypes = data['data'];   
     });
-    this._ngZone.run(() => {});
+    // this._ngZone.run(() => {});
   }
    
 }

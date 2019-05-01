@@ -20,36 +20,36 @@ export class FormManagerService {
       this.displayMessage = false;
     });
   }
-  getCountries()
+  getList(listname)
   {
-    return this.http.get("http://infmalariapp.herokuapp.com/countries");
+    return this.http.get("http://infmalariapp.herokuapp.com/"+listname);
   }
-  getTreatments()
-  {
-    return this.http.get("http://infmalariapp.herokuapp.com/treatments");
-  }
-  getPreventions()
-  {
-    return this.http.get("http://infmalariapp.herokuapp.com/preventions");
-  }
-  getSeverities()
-  {
-    return this.http.get("http://infmalariapp.herokuapp.com/severities");
-  }
-  getSymptoms()
-  {
-    return this.http.get("http://infmalariapp.herokuapp.com/symptoms");
-  }
-  getMalaria()
-  {
-    return this.http.get("http://infmalariapp.herokuapp.com/malaria-types");
-  }
-  getSymptomTypes()
-  {
-    return this.http.get("http://infmalariapp.herokuapp.com/symptom-types");
-  }
-  getTreatmentTypes()
-  {
-    return this.http.get("http://infmalariapp.herokuapp.com/treatment-types");
-  }
+  // getTreatments()
+  // {
+  //   return this.http.get("http://infmalariapp.herokuapp.com/treatments");
+  // }
+  // getPreventions()
+  // {
+  //   return this.http.get("http://infmalariapp.herokuapp.com/preventions");
+  // }
+  // getSeverities()
+  // {
+  //   return this.http.get("http://infmalariapp.herokuapp.com/severities");
+  // }
+  // getSymptoms()
+  // {
+  //   return this.http.get("http://infmalariapp.herokuapp.com/symptoms");
+  // }
+  // getMalaria()
+  // {
+  //   return this.http.get("http://infmalariapp.herokuapp.com/malaria-types");
+  // }
+  // getSymptomTypes()
+  // {
+  //   return this.http.get("http://infmalariapp.herokuapp.com/symptom-types");
+  // }
+  // getTreatmentTypes()
+  // {
+  //   return this.http.get("http://infmalariapp.herokuapp.com/treatment-types");
+  // }
 }
