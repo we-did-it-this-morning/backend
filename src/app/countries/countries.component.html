@@ -1,0 +1,17 @@
+<table *ngIf='countries'>
+  <tr>
+    <th>Name <input class='searchBar' type='text' [(ngModel)]='filterargs'/> </th>
+    <th>Malaria Types</th>
+    <th>Controls</th>
+  </tr>
+  <tr *ngFor='let country of countries | filter:filterargs'>
+    <td>{{ country.name }}</td>
+    <td>{{ getMalariaType(country.malariaTypes) }}</td>
+    <td>
+      <button><i class="material-icons">edit</i></button>
+      <button><i class="material-icons">delete</i></button>
+    </td>
+  </tr>
+</table>
+<br>
+<button><i class="material-icons">add</i></button>
