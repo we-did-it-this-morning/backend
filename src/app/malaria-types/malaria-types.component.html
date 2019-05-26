@@ -8,18 +8,109 @@
     <th>Symptoms</th>
     <th>Controls</th>
   </tr>
-  <tr *ngFor='let malariaType of malariaTypes | filter:filterargs'>
-    <td>{{ malariaType.name }}</td>
+  <tr *ngFor='let malariaType of malariaTypes;let i =index'>
+    <td >{{ malariaType.name }}</td>
     <td>{{ malariaType.description }}</td>
     <td>{{ malariaType.severity }}</td>
     <td>{{ getTreatments(malariaType.treatments) }}</td>
     <td>{{ getSymptoms(malariaType.symptoms) }}</td>
     <td>
-      <button><i class="material-icons">edit</i></button>
-      <button><i class="material-icons">delete</i></button>
+      <button class="material-icons" data-toggle="modal" data-target="#updateMalariaType"  (click)="typeList(i)">edit</button>
+      <button (click)="deleteType(i)"><i class="material-icons">delete</i></button>
     </td>
   </tr>
 </table>
 <br>
-<button><i class="material-icons">add</i></button>
+<button data-toggle="modal" data-target="#addType" ><i class="material-icons">add</i></button>
+<!-- UPDATE MALARIA TYPES MODAL -->
+<div class="modal fade" id="updateMalariaType" tabindex="-1" role="dialog" aria-labelledby="updateMalariaType"  >
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Update</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+              <form [formGroup]="updateMalariaType"  novalidate>
+                  <!-- <div *ngIf="updateMalariaType.controls['name'].invalid && (updateMalariaType.controls['name'].dirty || updateMalariaType.controls['name'].touched)" class="alert alert-danger">
+                      <div *ngIf="updateMalariaType.controls['name'].errors.required">Name is required.</div>
+                  </div>
+                  <div *ngIf="updateMalariaType.controls['level'].invalid && (updateMalariaType.controls['level'].dirty || updateMalariaType.controls['level'].touched)" class="alert alert-danger">
+                      <div *ngIf="updateMalariaType.controls['level'].errors.required">level is required.</div>
+                  </div> -->
+
+                  <div class="form-group">
+                      <input type="hidden" class="form-control" formControlName="id" #id value='{{list[0].value}}'>
+                  </div>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                         <input type="text" class="form-control" formControlName="name" #name value='{{list[1].value}}'>
+                        </div>
+                        <div class="form-group">
+                            <label for="desc">Description</label>
+                            <input type="text" class="form-control" formControlName="description"  #description value='{{list[2].value}}'>
+                        </div>   
+                        <div class="form-group">
+                            <label for="desc">Severity</label>
+                            <input type="text" class="form-control" formControlName="severity"  #severity value='{{list[3].value}}'>
+                        </div>    
+                        <div class="form-group">
+                            <label for="desc">Treatment</label>
+                            <input type="text" class="form-control" formControlName="treatments"  #treatment value='{{list[4].value}}'>
+                        </div> 
+                        <div class="form-group">
+                            <label for="desc">Symptoms</label>
+                            <input type="text" class="form-control" formControlName="symptoms"  #symptoms value='{{list[5].value}}'>
+                        </div>            
+                
+                  <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)="updateMalaria(id.value,name.value,description.value,severity.value,treatment.value,symtpoms.value)" [disabled]="!updateMalariaType.valid">Update</button>
+              </form>
+              <br>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
 </div>
+<!-- ************************** -->
+<div class="modal fade" id="addType" tabindex="-1" role="dialog" aria-labelledby="addType"  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="addMalariaType"  novalidate>
+                   
+                          <div class="form-group">
+                              <label for="name">Name</label>
+                           <input type="text" class="form-control" formControlName="name" #name2 placeholder='Name of type'>
+                          </div>
+                          <div class="form-group">
+                              <label for="desc">Description</label>
+                              <input type="text" class="form-control" formControlName="description"  #description2 placeholder='Description'>
+                          </div>   
+                          <div class="form-group">
+                              <label for="desc">Severity</label>
+                              <input type="text" class="form-control" formControlName="severity"  #severity2 placeholder='Severity level'>
+                          </div>    
+                          <div class="form-group">
+                              <label for="desc">Treatment</label>
+                              <input type="text" class="form-control" formControlName="treatments"  #treatment2 placeholder='Treatments(,)'>
+                          </div> 
+                          <div class="form-group">
+                              <label for="desc">Symptoms</label>
+                              <input type="text" class="form-control" formControlName="symptoms"  #symptoms2 placeholder='Symptoms(,)'>
+                          </div>            
+                  
+                    <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)="updateMalaria(name2.value,description2.value,severity2.value,treatment2.value,symtpoms2.value)" [disabled]="!updateMalariaType.valid">Update</button>
+                </form>
+                <br>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+  </div>
+  
+</div>
+
