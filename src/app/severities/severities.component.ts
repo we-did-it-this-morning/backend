@@ -17,7 +17,7 @@ export class SeveritiesComponent implements OnInit {
 
   // Filter to be applied to the severities object (for searching)
   filterargs = '';
-  list:any=[]
+  list:any=null
   updateSeverity: FormGroup;
   addSeverity:FormGroup;
 
@@ -43,6 +43,9 @@ export class SeveritiesComponent implements OnInit {
     // preventions objects stored in here (stub)
     let preventions: Array<Object> = [
       { id: 0, name: "P1", description: "First prevention"},
+      { id: 1, name: "P2", description: "second prevention"},
+      { id: 2, name: "P3", description: "third prevention"},
+      { id: 3, name: "P4", description: "fourth prevention"},
     ];
     
     return this.getNames(ids, preventions);

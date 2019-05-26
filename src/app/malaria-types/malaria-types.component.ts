@@ -10,7 +10,7 @@ export class MalariaTypesComponent implements OnInit {
 
   // Malaria Type objects stored in here (stub)
   malariaTypes: Object 
-  list:any=[]
+  list:any=null
   updateMalariaType: FormGroup;
   addMalariaType:FormGroup;
   // Filter to be applied to the malariaTypes object (for searching)

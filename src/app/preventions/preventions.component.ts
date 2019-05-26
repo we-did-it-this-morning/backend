@@ -11,7 +11,7 @@ export class PreventionsComponent implements OnInit {
 
   // Prevention objects stored in here (stub)
   preventions: Object = [];
-  list:any=[]
+  list:any=null
   updatePreventions: FormGroup;
   addPreventions:FormGroup;
   // Filter to be applied to the preventions object (for searching)

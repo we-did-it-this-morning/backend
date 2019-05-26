@@ -4,14 +4,14 @@
     <th>Name <input class='searchBar' type='text' [(ngModel)]='filterargs'/> </th>
     <th>Controls</th>
   </tr>
-  <tr *ngFor='let symptomType of symptomTypes | filter:filterargs'>
+  <tr *ngFor='let symptomType of symptomTypes | filter:filterargs;let i=index'>
     <td>{{ symptomType.name }}</td>
     <td>
-      <button><i class="material-icons">edit</i></button>
-      <button><i class="material-icons">delete</i></button>
+      <button data-toggle="modal" data-target="#updateSymType"  (click)="typeList(i)"><i class="material-icons">edit</i></button>
+      <button (click)="deleteType(i)"><i class="material-icons">delete</i></button>
     </td>
   </tr>
 </table>
 <br>
-<button><i class="material-icons">add</i></button>
+<button data-toggle="modal" data-target="#addType"><i class="material-icons">add</i></button>
 </div>

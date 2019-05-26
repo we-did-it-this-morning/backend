@@ -5,7 +5,7 @@
     <th>Description</th>
     <th>Controls</th>
   </tr>
-  <tr *ngFor='let prevention of preventions;let i=index'>
+  <tr *ngFor='let prevention of preventions| filter:filterargs;let i=index'>
     <td>{{ prevention.name }}</td>
     <td>{{ prevention.description }}</td>
     <td>
@@ -18,7 +18,7 @@
 <button data-toggle="modal" data-target="#addType"><i class="material-icons">add</i></button>
 
 <!-- UPDATE MALARIA TYPES MODAL -->
-<div class="modal fade" id="updatePreventionss" tabindex="-1" role="dialog" aria-labelledby="updatePreventionss"  >
+<div class="modal fade" id="updatePreventionss" *ngIf="list" tabindex="-1" role="dialog" aria-labelledby="updatePreventionss"  >
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -27,8 +27,6 @@
             </div>
             <div class="modal-body">
                 <form [formGroup]="updatePreventions" novalidate>
-                   
-  
                     <div class="form-group">
                         <input type="hidden" class="form-control"  #id value='{{list[0].value}}'>
                     </div>
@@ -39,10 +37,8 @@
                           <div class="form-group">
                               <label for="desc">Description</label>
                               <input type="text" class="form-control"   #description value='{{list[2].value}}'>
-                          </div>   
-                                   
-                  
-                    <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)="updatePrevention(id.value,name.value,description.value)" [disabled]="!updatePreventions.valid">Update</button>
+                          </div>                     
+                    <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)="updatePrevention(id.value,name.value,description.value)">Update</button>
                 </form>
                 <br>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -50,7 +46,7 @@
         </div>
     </div>
   </div>
-  <div class="modal fade" id="addType" tabindex="-1" role="dialog" aria-labelledby="addType"  >
+  <div class="modal fade" id="addType" tabindex="-1" role="dialog" *ngIf="list" aria-labelledby="addType"  >
       <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
               <div class="modal-header">
@@ -74,8 +70,6 @@
                                 <label for="desc">Description</label>
                                 <input type="text" class="form-control"  #description2 placeholder='Description'>
                             </div>   
-                                      
-                    
                       <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)="updatePrevention(name2.value,description2.value,severity2.value,treatment2.value,symtpoms2.value)">Add</button>
                   </form>
                   <br>

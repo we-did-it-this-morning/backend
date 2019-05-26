@@ -6,7 +6,7 @@
     <th>Preventions</th>
     <th>Controls</th>
   </tr>
-  <tr *ngFor='let severity of severities;let i = index'>
+  <tr *ngFor='let severity of severities| filter:filterargs;let i = index'>
     <td>{{ severity.level }}</td>
     <td>{{ severity.description }}</td>
     <td>{{ getPreventions(severity.preventions) }}</td>
@@ -18,7 +18,7 @@
 </table>
 <br>
 <button data-toggle="modal" data-target="#addType"><i class="material-icons">add</i></button>
-<div class="modal fade" id="updateSeverity" tabindex="-1" role="dialog" aria-labelledby="updateSeverity"  >
+<div class="modal fade" id="updateSeverity" *ngIf="list" tabindex="-1" role="dialog" aria-labelledby="updateSeverity"  >
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -30,20 +30,20 @@
                    
   
                           <div class="form-group">
-                              <label for="name">level</label>
+                              <label for="level">level</label>
                            <input type="text" class="form-control"  #name value='{{list[0].value}}'>
                           </div>
                           <div class="form-group">
                               <label for="desc">Description</label>
-                              <input type="text" class="form-control"   #description value='{{list[1].value}}'>
+                              <input type="text" class="form-control"  #description value='{{list[1].value}}'>
                           </div>   
                           <div class="form-group">
                               <label for="desc">Preventions</label>
-                              <input type="text" class="form-control"   #severity value='{{list[2].value}}'>
+                              <input type="text" class="form-control"   #preventions value='{{list[2].value}}'>
                           </div>    
                                      
                   
-                    <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)="updatePrevention(name.value,description.value,severity.value)">Update</button>
+                    <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)="updatePrevention(name.value,description.value,preventions.value)">Update</button>
                 </form>
                 <br>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -51,7 +51,7 @@
         </div>
     </div>
   </div>
-  <div class="modal fade" id="addType" tabindex="-1" role="dialog" aria-labelledby="addType"  >
+  <div class="modal fade" id="addType" tabindex="-1" *ngIf="list" role="dialog" aria-labelledby="addType"  >
       <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
               <div class="modal-header">
@@ -68,7 +68,7 @@
                       </div> -->
     
                             <div class="form-group">
-                                <label for="name">Level</label>
+                                <label for="level">Level</label>
                              <input type="text" class="form-control"  #name2 placeholder='Name of type'>
                             </div>
                             <div class="form-group">
@@ -77,10 +77,10 @@
                             </div>   
                             <div class="form-group">
                                 <label for="desc">Prevention</label>
-                                <input type="text" class="form-control"   #treatment2 placeholder='preventions(,)'>
+                                <input type="text" class="form-control"   #prevention placeholder='preventions(,)'>
                             </div>           
                     
-                      <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)="updatePrevention(name2.value,description2.value,treatment2.value)" >Update</button>
+                      <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)="updatePrevention(name2.value,description2.value,prevention.value)" >Update</button>
                   </form>
                   <br>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
