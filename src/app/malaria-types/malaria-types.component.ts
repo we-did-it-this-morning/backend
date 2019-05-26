@@ -9,7 +9,9 @@ import {FormHandlerService} from '../form-handler.service';
 export class MalariaTypesComponent implements OnInit {
 
   // Malaria Type objects stored in here (stub)
-  malariaTypes: Object 
+  malariaTypes: Object //   { id: 0, name: "M1", description: "Some description", severity: 1, treatments: [0], symptoms: [0]},
+  //   { id: 1, name: "M2", description: "Some description", severity: 2, treatments: [0,1], symptoms: [0,1]},
+  //   { id: 2, name: "M3", description: "Some description", severity: 3, treatments: [], symptoms: [0,1,2]}
   list:any=null
   updateMalariaType: FormGroup;
   addMalariaType:FormGroup;
@@ -23,17 +25,17 @@ export class MalariaTypesComponent implements OnInit {
     this.updateMalariaType = this.formBuilder.group({
       id: ['', [Validators.required]],
       name: ['', [Validators.required]],
-      level: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      Treatments:['',[Validators.required]],
-      Symptoms:['',[Validators.required]]
+      severity: ['', [Validators.required]],
+      treatments:['',[Validators.required]],
+      symptoms:['',[Validators.required]]
      });
      this.addMalariaType = this.formBuilder.group({
       name: ['', [Validators.required]],
-      level: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      Treatments:['',[Validators.required]],
-      Symptoms:['',[Validators.required]]
+      severity: ['', [Validators.required]],
+      treatments:['',[Validators.required]],
+      symptoms:['',[Validators.required]]
      });
   }
 
@@ -63,6 +65,7 @@ export class MalariaTypesComponent implements OnInit {
 
   getNames(ids: Array<number>, objects: Array<Object>){
     let types = '';
+    if(!ids)return '-';
     if (ids.length > 0) {
       ids.forEach(id => {
         let type = objects.filter(type => type['id'] == id)[0];

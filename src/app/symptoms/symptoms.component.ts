@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FormControl, FormGroup,FormBuilder,Validators } from '@angular/forms';
+import {FormHandlerService} from '../form-handler.service';
 @Component({
   selector: 'app-symptoms',
   templateUrl: './symptoms.component.html',
@@ -13,15 +14,35 @@ export class SymptomsComponent implements OnInit {
     { id: 1, name: "S2", description: "Some symptom", symptomType: 1},
     { id: 2, name: "S3", description: "Some symptom", symptomType: 2}
   ];
-
+  list:any=null
+  updateSym: FormGroup;
+  addSym:FormGroup;
   // Filter to be applied to the symptoms object (for searching)
   filterargs = '';
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder, private apiCaller:FormHandlerService) { }
 
   ngOnInit() {
+    this.populateList();
+    this.updateSym = this.formBuilder.group({
+      id: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      symptomType: ['', [Validators.required]],
+     });
+     this.addSym = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      symptomType: ['', [Validators.required]],
+     });
   }
-
+  populateList()
+  {
+    this.apiCaller.getList("symptoms").subscribe((data:Response)=>
+    {
+      this.symptoms = data['data'];
+    });
+  }
   // Used to retrieve the relevent foreign key data
   getType(id: number) {
 
@@ -36,6 +57,32 @@ export class SymptomsComponent implements OnInit {
   }
 
   getDescription(id: number, objects: Array<Object>){
+    if(!id) return "-";
     return objects.filter(type => type['id'] == id)[0]['name'];
+  }
+  
+  typeList(index)
+  {
+    this.list=Object.keys(this.symptoms[index]).map(key => ({ key,value: this.symptoms[index][key]}));
+    // console.log(this.list[0]);
+    return;
+  }
+  updateSymS(id,name,description,symptomType)
+  {
+    let obj = {"id":id,"name":name,"description":description,"symptomType":symptomType};
+    this.apiCaller.doApiCall(obj,"update-symptom");
+  }
+  
+  deleteType(index)
+  {
+    let obj = this.symptoms[index]['id'];
+    this.apiCaller.doApiCall(obj,"delete-symptom");
+  }
+  
+  addType(name,description,symptomType)
+  {
+ 
+    let obj = {"name":name,"description":description,"symptomType":symptomType};
+    this.apiCaller.doApiCall(obj,"update-symptom");
   }
 }
