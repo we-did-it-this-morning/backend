@@ -1,0 +1,91 @@
+<div>
+<table *ngIf='severities'>
+  <tr>
+    <th>Level</th>
+    <th>Description</th>
+    <th>Preventions</th>
+    <th>Controls</th>
+  </tr>
+  <tr *ngFor='let severity of severities| filter:filterargs;let i = index'>
+    <td>{{ severity.level }}</td>
+    <td>{{ severity.description }}</td>
+    <td>{{ getPreventions(severity.preventions) }}</td>
+    <td>
+      <button data-toggle="modal" data-target="#updateSeverity"  (click)="typeList(i)"><i class="material-icons">edit</i></button>
+      <button (click)="deleteType(i)"><i class="material-icons">delete</i></button>
+    </td>
+  </tr>
+</table>
+<br>
+<button data-toggle="modal" data-target="#addType"><i class="material-icons">add</i></button>
+<div class="modal fade" id="updateSeverity" *ngIf="list" tabindex="-1" role="dialog" aria-labelledby="updateSeverity"  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Update</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="updateSeverity"  *ngIf="list" novalidate>
+                   
+  
+                          <div class="form-group">
+                              <label for="level">level</label>
+                           <input type="text" class="form-control"  #name value='{{list[0].value}}'>
+                          </div>
+                          <div class="form-group">
+                              <label for="desc">Description</label>
+                              <input type="text" class="form-control"  #description value='{{list[1].value}}'>
+                          </div>   
+                          <div class="form-group">
+                              <label for="desc">Preventions</label>
+                              <input type="text" class="form-control"   #preventions value='{{list[2].value}}'>
+                          </div>    
+                                     
+                  
+                    <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)="updatePrevention(name.value,description.value,preventions.value)">Update</button>
+                </form>
+                <br>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="modal fade" id="addType" tabindex="-1" *ngIf="list" role="dialog" aria-labelledby="addType"  >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Add</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span></button>
+              </div>
+              <div class="modal-body">
+                  <form [formGroup]="addSeverity"  novalidate>
+                      <!-- <div *ngIf="updateMalariaType.controls['name'].invalid && (updateMalariaType.controls['name'].dirty || updateMalariaType.controls['name'].touched)" class="alert alert-danger">
+                          <div *ngIf="updateMalariaType.controls['name'].errors.required">Name is required.</div>
+                      </div>
+                      <div *ngIf="updateMalariaType.controls['level'].invalid && (updateMalariaType.controls['level'].dirty || updateMalariaType.controls['level'].touched)" class="alert alert-danger">
+                          <div *ngIf="updateMalariaType.controls['level'].errors.required">level is required.</div>
+                      </div> -->
+    
+                            <div class="form-group">
+                                <label for="level">Level</label>
+                             <input type="text" class="form-control"  #name2 placeholder='Name of type'>
+                            </div>
+                            <div class="form-group">
+                                <label for="desc">Description</label>
+                                <input type="text" class="form-control"  #description2 placeholder='Description'>
+                            </div>   
+                            <div class="form-group">
+                                <label for="desc">Prevention</label>
+                                <input type="text" class="form-control"   #prevention placeholder='preventions(,)'>
+                            </div>           
+                    
+                      <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)="addType(name2.value,description2.value,prevention.value)" >Add</button>
+                  </form>
+                  <br>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+          </div>
+      </div>
+    </div>
+</div>
