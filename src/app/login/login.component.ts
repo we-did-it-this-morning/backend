@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -14,9 +15,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    this.loginService.isLoggedIn = true;
-    //Actaully call api for real login
-    
+    this.loginService.login().subscribe( token => this.loginService.storeToken(token["data"]["token"]));
   }
 
 }

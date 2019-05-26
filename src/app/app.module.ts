@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component';
 import { FilterPipe } from './filter.pipe';
 import { TreatmentTypesComponent } from './treatment-types/treatment-types.component';
 import { SymptomTypesComponent } from './symptom-types/symptom-types.component'
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SymptomTypesComponent } from './symptom-types/symptom-types.component'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
