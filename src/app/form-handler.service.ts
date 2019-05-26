@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';  
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 
 export class FormHandlerService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private loginService : LoginService) { }
   public displayMessage:boolean=false;
   public mesage:string;
   //Retrieve the relevant data to display.
@@ -17,6 +18,8 @@ export class FormHandlerService {
   }
   doApiCall(obj,type)
   {
+    obj.token = this.loginService.getToken();
+    
     return this.http.post("http://infmalariapp.herokuapp.com/"+type,obj).subscribe((response)=>{
       this.mesage="Operation Succesfully executed";
       this.displayMessage = true;
