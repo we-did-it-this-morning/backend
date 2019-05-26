@@ -32,12 +32,17 @@ export class CountriesComponent implements OnInit {
     ];
 
     let types = '';
-    ids.forEach(id => {
-      let type = malariaTypes.filter(type => type['id'] == id)[0];
-      types += ', ' + type['name']
-    });
-    // Removes first ', '
-    types= types.slice(2);
+    if (ids.length > 0) {
+      ids.forEach(id => {
+        let type = malariaTypes.filter(type => type['id'] == id)[0];
+        types += ', ' + type['name']
+      });
+      // Removes first ', '
+      types = types.slice(2);
+    }
+    else {
+      types = '-';
+    }
 
     return types;
   }
