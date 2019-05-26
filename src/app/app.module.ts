@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
-import { UsersComponent } from './users/users.component';
 import { CountriesComponent } from './countries/countries.component';
 import { SeveritiesComponent } from './severities/severities.component';
 import { PreventionsComponent } from './preventions/preventions.component';
@@ -23,7 +22,6 @@ import { SymptomTypesComponent } from './symptom-types/symptom-types.component'
     AppComponent,
     LoginComponent,
     NavComponent,
-    UsersComponent,
     CountriesComponent,
     SeveritiesComponent,
     PreventionsComponent,

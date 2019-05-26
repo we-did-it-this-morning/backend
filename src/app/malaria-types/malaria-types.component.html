@@ -1,3 +1,25 @@
-<p>
-  malaria-types works!
-</p>
+<div>
+<table *ngIf='malariaTypes'>
+  <tr>
+    <th>Name <input class='searchBar' type='text' [(ngModel)]='filterargs'/> </th>
+    <th>Description</th>
+    <th>Severity</th>
+    <th>Treatments</th>
+    <th>Symptoms</th>
+    <th>Controls</th>
+  </tr>
+  <tr *ngFor='let malariaType of malariaTypes | filter:filterargs'>
+    <td>{{ malariaType.name }}</td>
+    <td>{{ malariaType.description }}</td>
+    <td>{{ malariaType.severity }}</td>
+    <td>{{ getTreatments(malariaType.treatments) }}</td>
+    <td>{{ getSymptoms(malariaType.symptoms) }}</td>
+    <td>
+      <button><i class="material-icons">edit</i></button>
+      <button><i class="material-icons">delete</i></button>
+    </td>
+  </tr>
+</table>
+<br>
+<button><i class="material-icons">add</i></button>
+</div>

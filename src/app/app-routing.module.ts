@@ -9,7 +9,6 @@ import { PreventionsComponent } from 'src/app/preventions/preventions.component'
 import { SeveritiesComponent } from 'src/app/severities/severities.component';
 import { SymptomsComponent } from 'src/app/symptoms/symptoms.component';
 import { TreatmentsComponent } from 'src/app/treatments/treatments.component';
-import { UsersComponent } from 'src/app/users/users.component';
 import { TreatmentTypesComponent } from 'src/app/treatment-types/treatment-types.component';
 import { SymptomTypesComponent } from 'src/app/symptom-types/symptom-types.component';
 
@@ -23,7 +22,6 @@ const routes: Routes = [
   { path: 'severities', component: SeveritiesComponent },
   { path: 'symptoms', component: SymptomsComponent },
   { path: 'treatments', component: TreatmentsComponent },
-  { path: 'users', component: UsersComponent },
   { path: 'treatment-types', component: TreatmentTypesComponent },
   { path: 'symptom-types', component: SymptomTypesComponent },
 ];

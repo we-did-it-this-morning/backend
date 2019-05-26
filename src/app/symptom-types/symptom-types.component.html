@@ -1,3 +1,17 @@
-<p>
-  symptom-types works!
-</p>
+<div>
+<table *ngIf='symptomTypes'>
+  <tr>
+    <th>Name <input class='searchBar' type='text' [(ngModel)]='filterargs'/> </th>
+    <th>Controls</th>
+  </tr>
+  <tr *ngFor='let symptomType of symptomTypes | filter:filterargs'>
+    <td>{{ symptomType.name }}</td>
+    <td>
+      <button><i class="material-icons">edit</i></button>
+      <button><i class="material-icons">delete</i></button>
+    </td>
+  </tr>
+</table>
+<br>
+<button><i class="material-icons">add</i></button>
+</div>

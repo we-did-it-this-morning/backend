@@ -1,3 +1,21 @@
-<p>
-  severities works!
-</p>
+<div>
+<table *ngIf='severities'>
+  <tr>
+    <th>Level</th>
+    <th>Description</th>
+    <th>Preventions</th>
+    <th>Controls</th>
+  </tr>
+  <tr *ngFor='let severity of severities | filter:filterargs'>
+    <td>{{ severity.level }}</td>
+    <td>{{ severity.description }}</td>
+    <td>{{ getPreventions(severity.preventions) }}</td>
+    <td>
+      <button><i class="material-icons">edit</i></button>
+      <button><i class="material-icons">delete</i></button>
+    </td>
+  </tr>
+</table>
+<br>
+<button><i class="material-icons">add</i></button>
+</div>

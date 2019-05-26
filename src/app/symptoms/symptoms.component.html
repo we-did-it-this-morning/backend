@@ -1,3 +1,21 @@
-<p>
-  symptoms works!
-</p>
+<div>
+<table *ngIf='symptoms'>
+  <tr>
+    <th>Name <input class='searchBar' type='text' [(ngModel)]='filterargs'/> </th>
+    <th>Description</th>
+    <th>Type</th>
+    <th>Controls</th>
+  </tr>
+  <tr *ngFor='let symptom of symptoms | filter:filterargs'>
+    <td>{{ symptom.name }}</td>
+    <td>{{ symptom.description }}</td>
+    <td>{{ getType(symptom.symptomType) }}</td>
+    <td>
+      <button><i class="material-icons">edit</i></button>
+      <button><i class="material-icons">delete</i></button>
+    </td>
+  </tr>
+</table>
+<br>
+<button><i class="material-icons">add</i></button>
+</div>

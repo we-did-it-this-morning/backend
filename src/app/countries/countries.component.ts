@@ -31,10 +31,14 @@ export class CountriesComponent implements OnInit {
       { id: 2, name: "M3", description: "", severity: 0, treatments: [], symptoms: [] },
     ];
 
+    return this.getNames(ids, malariaTypes);
+  }
+
+  getNames(ids: Array<number>, objects: Array<Object>){
     let types = '';
     if (ids.length > 0) {
       ids.forEach(id => {
-        let type = malariaTypes.filter(type => type['id'] == id)[0];
+        let type = objects.filter(type => type['id'] == id)[0];
         types += ', ' + type['name']
       });
       // Removes first ', '
