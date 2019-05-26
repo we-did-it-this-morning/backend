@@ -20,7 +20,23 @@ th {
     background-color: dodgerblue;
     color: white;
 }
+
+h1{
+    color: dodgerblue;
+    font-size: 4em;
+    font-style: bold;
+}
+
+.welcomeText{
+    position: absolute;
+    top: 35%;
+    left: 25%;
+}
   
+.error{
+    color: red;
+    font-size: 1.5em;
+}
 tr:hover {
     background-color:#ddd;
 }

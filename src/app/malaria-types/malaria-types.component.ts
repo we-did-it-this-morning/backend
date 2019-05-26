@@ -85,7 +85,7 @@ export class MalariaTypesComponent implements OnInit {
     this.apiCaller.getList("malaria-types").subscribe((data:Response)=>
     {
       this.malariaTypes = data['data'];
-      console.log(this.malariaTypes);
+      //console.log(this.malariaTypes);
     });
   }
   typeList(index)

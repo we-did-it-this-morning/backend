@@ -1,12 +1,29 @@
-<div class="half">
-  <form>
-    <label>Userame</label>
-    <input type="text" placeholder="Your username...">
+<div *ngIf = "!loggedIn" class="half">
+
+    <div *ngIf="submitted && loginForm.controls.username.errors" class="error">
+        <div *ngIf="loginForm.controls.username.errors.required">Username is required</div>
+    </div>
+
+    <div *ngIf="submitted && loginForm.controls.password.errors" class="error">
+        <div *ngIf="loginForm.controls.password.errors.required">Password is required</div>
+    </div>
+
+    <div *ngIf="submitted && unauthorised" class="error">
+       Your username or password is incorrect
+    </div>
+
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <label>Username</label>
+    <input type="text" class="form-control" formControlName="username" placeholder="Your username...">
 
     <label>Password</label>
-    <input type="password" placeholder="Your password...">
+    <input type="password" class="form-control" formControlName="password" placeholder="Your password...">
     
-    <button (click) ="login()" value="Login">Login</button>
+    <button  type="submit"  value="Login">Login</button>
 
   </form>
+
 </div>
+
+<h1 class="welcomeText" *ngIf="loggedIn"> <strong> Welcome, you may proceed</strong></h1>
+  

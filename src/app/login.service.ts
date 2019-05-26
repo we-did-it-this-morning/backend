@@ -12,9 +12,9 @@ export class LoginService {
   
   constructor(private http : HttpClient) { }
 
-  login(){
+  login(_username,_password){
     const headers = new HttpHeaders({'Access-Control-Allow-Origin':'*'});
-    return this.http.post('http://localhost:3000/log-in',{username: "admin",password: "1234"},{headers : headers});
+    return this.http.post('http://infmalariapp.herokuapp.com/log-in',{username: _username,password: _password},{headers : headers});
    }
 
    storeToken(_token){

@@ -95,7 +95,7 @@ export class CountriesComponent implements OnInit {
     var seperateFour = symptomType.split(',').map(Number);
 
     let obj = {"name":name,"malariaTypes":seperateFour};
-    this.apiCaller.doApiCall(obj,"update-countr");
+    this.apiCaller.doApiCall(obj,"update-country");
   }
 
 }
