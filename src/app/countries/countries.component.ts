@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FormControl, FormGroup,FormBuilder,Validators } from '@angular/forms';
+import {FormHandlerService} from '../form-handler.service';
 @Component({
   selector: 'app-countries',
   templateUrl: './countries.component.html',
@@ -12,13 +13,32 @@ export class CountriesComponent implements OnInit {
     { id: 0, name: "South Africa", malariaTypes: [0,1,2]},
     { id: 1, name: "Canada", malariaTypes: []},
   ];
-
-  // Filter to be applied to the countries object (for searching)
+  list:any=null
+  updateCountry: FormGroup;
+  addCountry:FormGroup;
+  // Filter to be applied to the symptoms object (for searching)
   filterargs = '';
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder, private apiCaller:FormHandlerService) { }
 
   ngOnInit() {
+    this.populateList();
+    this.updateCountry = this.formBuilder.group({
+      id: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      malariaTypes: ['', [Validators.required]],
+     });
+     this.addCountry = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      malariaTypes: ['', [Validators.required]],
+     });
+  }
+  populateList()
+  {
+    this.apiCaller.getList("countries").subscribe((data:Response)=>
+    {
+      this.countries = data['data'];
+    });
   }
 
   // Used to retrieve the relevent foreign key data
@@ -36,6 +56,7 @@ export class CountriesComponent implements OnInit {
 
   getNames(ids: Array<number>, objects: Array<Object>){
     let types = '';
+    if(!ids)return "-";
     if (ids.length > 0) {
       ids.forEach(id => {
         let type = objects.filter(type => type['id'] == id)[0];
@@ -49,6 +70,32 @@ export class CountriesComponent implements OnInit {
     }
 
     return types;
+  }
+  typeList(index)
+  {
+    this.list=Object.keys(this.countries[index]).map(key => ({ key,value: this.countries[index][key]}));
+    // console.log(this.list[0]);
+    return;
+  }
+  updateCountries(id,name,symptomType)
+  {
+    var seperateFour = symptomType.split(',').map(Number);
+    let obj = {"id":id,"name":name,"malariaTypes":seperateFour};
+    this.apiCaller.doApiCall(obj,"update-country");
+  }
+  
+  deleteType(index)
+  {
+    let obj = this.countries[index]['id'];
+    this.apiCaller.doApiCall(obj,"delete-country");
+  }
+  
+  addType(name,symptomType)
+  {
+    var seperateFour = symptomType.split(',').map(Number);
+
+    let obj = {"name":name,"malariaTypes":seperateFour};
+    this.apiCaller.doApiCall(obj,"update-countr");
   }
 
 }

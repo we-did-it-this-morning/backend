@@ -17,7 +17,7 @@
   </tr>
 </table>
 <br>
-<button data-toggle="modal" data-target="#addType"s><i class="material-icons">add</i></button>
+<button data-toggle="modal" data-target="#addType"><i class="material-icons">add</i></button>
 <div class="modal fade" id="updateSym" *ngIf="list" tabindex="-1" role="dialog" aria-labelledby="updateSym"  >
   <div class="modal-dialog modal-dialog-centered" *ngIf="list" role="document">
       <div class="modal-content">
@@ -82,7 +82,7 @@
                               <input type="text" class="form-control"   #prevention placeholder='Symtpom Type'>
                           </div>           
                   
-                    <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)="addType(name2.value,description2.value,prevention.value)" >Update</button>
+                    <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)="addType(name2.value,description2.value,prevention.value)" >Add</button>
                 </form>
                 <br>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
