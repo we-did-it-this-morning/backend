@@ -37,7 +37,7 @@ import { SymptomTypesComponent } from './symptom-types/symptom-types.component'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,ReactiveFormsModule,HttpClientModule,
+    FormsModule,ReactiveFormsModule,HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

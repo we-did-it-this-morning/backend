@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from '../login.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private loginService : LoginService) { }
 
   ngOnInit() {
+  }
+
+  login(){
+    this.loginService.login().subscribe( token => this.loginService.storeToken(token["data"]["token"]));
   }
 
 }
