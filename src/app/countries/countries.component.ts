@@ -73,7 +73,23 @@ export class CountriesComponent implements OnInit {
   }
   typeList(index)
   {
-    this.list=Object.keys(this.countries[index]).map(key => ({ key,value: this.countries[index][key]}));
+    const country = this.countries[index];
+    this.list = [
+      {
+        key: 'id',
+        value: country.id,
+      },
+      {
+        key: 'name',
+        value: country.name,
+      },
+      {},
+      {
+        key: 'malariaTypes',
+        value: country.malariaTypes.join(','),
+      }
+    ];
+    // thirs.list=Object.keys(this.countries[index]).map(key => ({ key,value: this.countries[index][key]}));
     // console.log(this.list[0]);
     return;
   }
