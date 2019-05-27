@@ -76,7 +76,9 @@ export class TreatmentsComponent implements OnInit {
   
   deleteType(index)
   {
-    let obj = this.treatments[index]['id'];
+    let obj = {
+      id: this.treatments[index]['id']
+    };
     this.apiCaller.doApiCall(obj,"delete-treatment");
   }
   

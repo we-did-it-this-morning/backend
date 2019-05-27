@@ -19,12 +19,15 @@ export class FormHandlerService {
   doApiCall(obj,type)
   {
     obj.token = this.loginService.getToken();
+
+    console.log(obj.token)
     
     return this.http.post("http://infmalariapp.herokuapp.com/"+type,obj).subscribe((response)=>{
       this.mesage="Operation Succesfully executed";
       this.displayMessage = true;
     },(err)=>
     {
+      console.error(err);
       this.mesage="An error occured while executing operation";
       this.displayMessage = false;
     });
